@@ -102,6 +102,12 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
     ).animate(_animationController);
 
     _animationController.forward().then((_) {
+      // Reset the controller for next swipe
+      _animationController.reset();
+      setState(() {
+        _dragOffset = Offset.zero;
+        _isDragging = false;
+      });
       onComplete();
     });
   }
@@ -117,6 +123,7 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
     _animationController.forward().then((_) {
       setState(() {
         _dragOffset = Offset.zero;
+        _isDragging = false;
       });
       _animationController.reset();
     });

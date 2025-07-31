@@ -140,4 +140,35 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get votes => 'oy';
+
+  // Discover Screen
+  @override
+  String get discover => 'Keşfet';
+
+  @override
+  String get swipeOrTap => 'Kaydır veya Dokun';
+
+  @override
+  String get pass => 'Geç';
+
+  @override
+  String get like => 'Beğen';
+
+  @override
+  String get allMoviesViewed => 'Tüm filmler görüntülendi!';
+
+  @override
+  String get refreshToSeeMore => 'Daha fazla film görmek için yenileyin';
+
+  @override
+  String get refresh => 'Yenile';
+
+  @override
+  String get noMoviesAvailable => 'Film Bulunmuyor';
+
+  @override
+  String get pleaseTryAgain => 'Lütfen daha sonra tekrar deneyin';
+
+  @override
+  String get addedToFavorites => 'favorilere eklendi!';
 }

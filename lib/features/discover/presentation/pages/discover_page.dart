@@ -46,7 +46,7 @@ class _DiscoverViewState extends State<DiscoverView> {
         surfaceTintColor: Colors.transparent,
         scrolledUnderElevation: 0,
         title: Text(
-          'Discover',
+          l10n.discover,
           style: AppTextStyles.h2.copyWith(
             color: isDark ? AppColors.darkText : AppColors.lightText,
             fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                 return _buildEmptyState(l10n, isDark);
               }
 
-              return _buildSwipeCards();
+              return _buildSwipeCards(l10n);
             },
             error: (message) => _buildErrorState(l10n, message, isDark),
           );
@@ -136,7 +136,7 @@ class _DiscoverViewState extends State<DiscoverView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Swipe or Tap',
+                  l10n.swipeOrTap,
                   style: AppTextStyles.bodySmall.copyWith(
                     color: isDark ? AppColors.darkText : AppColors.lightText,
                     fontWeight: FontWeight.w600,
@@ -147,9 +147,15 @@ class _DiscoverViewState extends State<DiscoverView> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.arrow_back, size: 16, color: Colors.red),
-                    Text(' Pass  ', style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey)),
+                    Text(
+                      ' ${l10n.pass}  ',
+                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey),
+                    ),
                     Icon(Icons.favorite, size: 16, color: Colors.green),
-                    Text(' Like', style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey)),
+                    Text(
+                      ' ${l10n.like}',
+                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey),
+                    ),
                   ],
                 ),
               ],
@@ -173,7 +179,7 @@ class _DiscoverViewState extends State<DiscoverView> {
     );
   }
 
-  Widget _buildSwipeCards() {
+  Widget _buildSwipeCards(AppLocalizations l10n) {
     // Eğer sondan 2 kart kaldıysa yeni filmler yükle
     if (_currentIndex >= _displayedMovies.length - 2) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -197,7 +203,7 @@ class _DiscoverViewState extends State<DiscoverView> {
             const Icon(Icons.movie_filter, size: 80, color: AppColors.primary),
             const SizedBox(height: 20),
             Text(
-              'All movies viewed!',
+              l10n.allMoviesViewed,
               style: AppTextStyles.h2.copyWith(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? AppColors.darkText
@@ -207,7 +213,7 @@ class _DiscoverViewState extends State<DiscoverView> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Refresh to see more movies',
+              l10n.refreshToSeeMore,
               style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
             ),
             const SizedBox(height: 20),
@@ -218,7 +224,7 @@ class _DiscoverViewState extends State<DiscoverView> {
                 });
                 context.read<MovieBloc>().add(const MovieEvent.refreshMovies());
               },
-              child: const Text('Refresh'),
+              child: Text(l10n.refresh),
             ),
           ],
         ),
@@ -232,6 +238,9 @@ class _DiscoverViewState extends State<DiscoverView> {
           // Background card (next movie)
           if (_currentIndex + 1 < _displayedMovies.length)
             SwipeCard(
+              key: ValueKey(
+                _displayedMovies[_currentIndex + 1].id,
+              ), // Key ile widget'ı yeniden oluştur
               movie: _displayedMovies[_currentIndex + 1],
               onSwipeLeft: () {},
               onSwipeRight: () {},
@@ -239,6 +248,7 @@ class _DiscoverViewState extends State<DiscoverView> {
             ),
           // Top card (current movie)
           SwipeCard(
+            key: ValueKey(_displayedMovies[_currentIndex].id), // Key ile widget'ı yeniden oluştur
             movie: _displayedMovies[_currentIndex],
             onSwipeLeft: _onSwipeLeft,
             onSwipeRight: _onSwipeRight,
@@ -257,7 +267,7 @@ class _DiscoverViewState extends State<DiscoverView> {
           const Icon(Icons.explore, size: 80, color: AppColors.primary),
           const SizedBox(height: 20),
           Text(
-            'No Movies Available',
+            l10n.noMoviesAvailable,
             style: AppTextStyles.h2.copyWith(
               color: isDark ? AppColors.darkText : AppColors.lightText,
               fontWeight: FontWeight.bold,
@@ -265,7 +275,7 @@ class _DiscoverViewState extends State<DiscoverView> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Please try again later',
+            l10n.pleaseTryAgain,
             style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
           ),
           const SizedBox(height: 20),
@@ -313,32 +323,30 @@ class _DiscoverViewState extends State<DiscoverView> {
 
   void _onSwipeLeft() {
     // Just move to next movie (pass)
-    if (_currentIndex < _displayedMovies.length - 1) {
-      setState(() {
-        _currentIndex++;
-      });
-    }
+    setState(() {
+      _currentIndex++;
+    });
   }
 
   void _onSwipeRight() {
     // Add to favorites and move to next movie
-    if (_currentIndex < _displayedMovies.length) {
-      final movie = _displayedMovies[_currentIndex];
-      context.read<MovieBloc>().add(MovieEvent.toggleFavorite(movieId: movie.id));
+    final movie = _displayedMovies[_currentIndex];
+    final l10n = AppLocalizations.of(context)!;
 
-      setState(() {
-        _currentIndex++;
-      });
+    context.read<MovieBloc>().add(MovieEvent.toggleFavorite(movieId: movie.id));
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${movie.title} added to favorites!'),
-          backgroundColor: Colors.green,
-          duration: const Duration(seconds: 2),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
+    setState(() {
+      _currentIndex++;
+    });
+
+    // Show success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${movie.title} ${l10n.addedToFavorites}'),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 }

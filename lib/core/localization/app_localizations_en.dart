@@ -140,4 +140,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get votes => 'votes';
+
+  // Discover Screen
+  @override
+  String get discover => 'Discover';
+
+  @override
+  String get swipeOrTap => 'Swipe or Tap';
+
+  @override
+  String get pass => 'Pass';
+
+  @override
+  String get like => 'Like';
+
+  @override
+  String get allMoviesViewed => 'All movies viewed!';
+
+  @override
+  String get refreshToSeeMore => 'Refresh to see more movies';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get noMoviesAvailable => 'No Movies Available';
+
+  @override
+  String get pleaseTryAgain => 'Please try again later';
+
+  @override
+  String get addedToFavorites => 'added to favorites!';
 }

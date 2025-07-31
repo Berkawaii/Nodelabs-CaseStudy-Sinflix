@@ -83,6 +83,18 @@ abstract class AppLocalizations {
   String get awards;
   String get metascore;
   String get votes;
+
+  // Discover Screen
+  String get discover;
+  String get swipeOrTap;
+  String get pass;
+  String get like;
+  String get allMoviesViewed;
+  String get refreshToSeeMore;
+  String get refresh;
+  String get noMoviesAvailable;
+  String get pleaseTryAgain;
+  String get addedToFavorites;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
