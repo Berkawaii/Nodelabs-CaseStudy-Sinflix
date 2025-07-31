@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sinflix/core/constants/app_assets.dart';
 
 import '../../../../core/di/injection.dart';
 import '../../../../core/localization/app_localizations.dart';
@@ -71,29 +72,17 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
       appBar: AppBar(
-        backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+        backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
         elevation: 0,
-        title: Text(
-          'Sinflix',
-          style: AppTextStyles.h2.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+        surfaceTintColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        title: Center(
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.asset(AppAssets.logo, fit: BoxFit.contain),
+          ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search, color: isDark ? AppColors.darkText : AppColors.lightText),
-            onPressed: () {
-              // Search functionality
-            },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.notifications_outlined,
-              color: isDark ? AppColors.darkText : AppColors.lightText,
-            ),
-            onPressed: () {
-              // Notifications
-            },
-          ),
-        ],
       ),
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
