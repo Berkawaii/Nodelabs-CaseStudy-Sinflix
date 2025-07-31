@@ -1,0 +1,54 @@
+{
+    "dart.flutterSdkPath": null,
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": false,
+    "dart.lineLength": 100,
+    "dart.insertArgumentPlaceholders": false,
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "dart.hotReloadOnSave": "allIfDirty",
+    "dart.flutterHotReloadOnSave": "allIfDirty",
+    "dart.flutterCreateAndroidLanguage": "kotlin",
+    "dart.flutterCreateIOSLanguage": "swift",
+    "dart.flutterCreatePlatforms": [
+        "android",
+        "ios",
+        "web"
+    ],
+    "dart.analysisExcludedFolders": [
+        "build/**",
+        ".dart_tool/**"
+    ],
+    "dart.enableSdkFormatter": true,
+    "dart.triggerSignatureHelpAutomatically": true,
+    "dart.completeFunctionCalls": true,
+    "dart.showTodos": true,
+    "dart.showIgnoreQuickFixes": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [100],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "files.associations": {
+        "*.dart": "dart",
+        "*.yaml": "yaml",
+        "*.yml": "yaml"
+    },
+    "files.exclude": {
+        "**/.dart_tool": true,
+        "**/.packages": true,
+        "**/build": true,
+        "**/.flutter-plugins": true,
+        "**/.flutter-plugins-dependencies": true
+    },
+    "emmet.includeLanguages": {
+        "dart": "html"
+    },
+    "emmet.syntaxProfiles": {
+        "dart": "html"
+    }
+}

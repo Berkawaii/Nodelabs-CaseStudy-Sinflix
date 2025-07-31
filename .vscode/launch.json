@@ -1,0 +1,76 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (Development)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "development"
+            ],
+            "env": {
+                "FLUTTER_ENV": "development"
+            }
+        },
+        {
+            "name": "Debug (Production)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "production"
+            ],
+            "env": {
+                "FLUTTER_ENV": "production"
+            }
+        },
+        {
+            "name": "Profile Mode",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Release Mode",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Debug on Android",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "deviceId": "android"
+        },
+        {
+            "name": "Debug on iOS",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "deviceId": "ios"
+        },
+        {
+            "name": "Debug on Chrome",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "deviceId": "chrome"
+        },
+        {
+            "name": "Debug with Hot Reload",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "args": [
+                "--enable-asserts"
+            ]
+        }
+    ]
+}

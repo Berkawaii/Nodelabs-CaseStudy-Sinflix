@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "bradlc.vscode-tailwindcss",
+        "usernamehw.errorlens",
+        "oderwat.indent-rainbow",
+        "gruntfuggly.todo-tree",
+        "ms-vscode.theme-tomorrow-night-blue",
+        "pkief.material-icon-theme",
+        "streetsidesoftware.code-spell-checker",
+        "formulahendry.auto-rename-tag",
+        "ms-vscode.vscode-typescript-next",
+        "christian-kohler.path-intellisense",
+        "wayou.vscode-todo-highlight",
+        "alefragnani.bookmarks",
+        "ms-vsliveshare.vsliveshare",
+        "github.copilot"
+    ]
+}
