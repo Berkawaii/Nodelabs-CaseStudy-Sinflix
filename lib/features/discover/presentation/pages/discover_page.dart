@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/di/injection.dart';
 import '../../../../core/localization/app_localizations.dart';
@@ -52,14 +53,6 @@ class _DiscoverViewState extends State<DiscoverView> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh, color: isDark ? AppColors.darkText : AppColors.lightText),
-            onPressed: () {
-              context.read<MovieBloc>().add(const MovieEvent.refreshMovies());
-            },
-          ),
-        ],
       ),
       body: BlocConsumer<MovieBloc, MovieState>(
         listener: (context, state) {
@@ -200,7 +193,17 @@ class _DiscoverViewState extends State<DiscoverView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.movie_filter, size: 80, color: AppColors.primary),
+            // Lottie Animation
+            SizedBox(
+              width: 150,
+              height: 150,
+              child: Lottie.asset(
+                'assets/lottie/movies_completed.json',
+                fit: BoxFit.contain,
+                repeat: true,
+                animate: true,
+              ),
+            ),
             const SizedBox(height: 20),
             Text(
               l10n.allMoviesViewed,
@@ -264,7 +267,17 @@ class _DiscoverViewState extends State<DiscoverView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.explore, size: 80, color: AppColors.primary),
+          // Lottie Animation
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: Lottie.asset(
+              'assets/lottie/empty_movies.json',
+              fit: BoxFit.contain,
+              repeat: true,
+              animate: true,
+            ),
+          ),
           const SizedBox(height: 20),
           Text(
             l10n.noMoviesAvailable,

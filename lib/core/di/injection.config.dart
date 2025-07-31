@@ -82,11 +82,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i17.GetCurrentUserUseCase>(),
       ),
     );
-    gh.factory<_i536.GetMoviesUseCase>(
-      () => _i536.GetMoviesUseCase(gh<_i224.MovieRepository>()),
-    );
     gh.factory<_i211.ToggleFavoriteUseCase>(
       () => _i211.ToggleFavoriteUseCase(gh<_i224.MovieRepository>()),
+    );
+    gh.factory<_i536.GetMoviesUseCase>(
+      () => _i536.GetMoviesUseCase(gh<_i224.MovieRepository>()),
     );
     gh.factory<_i48.MovieBloc>(
       () => _i48.MovieBloc(
