@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -52,9 +53,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on DioException catch (e) {
       return Left(NetworkErrorHandler.handleError(e));
     } catch (e) {
-      return Left(
-        ServerFailure('An unexpected error occurred: ${e.toString()}'),
-      );
+      return Left(ServerFailure('An unexpected error occurred: ${e.toString()}'));
     }
   }
 
@@ -93,9 +92,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on DioException catch (e) {
       return Left(NetworkErrorHandler.handleError(e));
     } catch (e) {
-      return Left(
-        ServerFailure('An unexpected error occurred: ${e.toString()}'),
-      );
+      return Left(ServerFailure('An unexpected error occurred: ${e.toString()}'));
     }
   }
 
@@ -140,9 +137,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final hasToken = await _tokenStorage.hasToken();
       return Right(hasToken);
     } catch (e) {
-      return Left(
-        CacheFailure('Failed to check login status: ${e.toString()}'),
-      );
+      return Left(CacheFailure('Failed to check login status: ${e.toString()}'));
     }
   }
 }
