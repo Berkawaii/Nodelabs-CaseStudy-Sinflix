@@ -1,7 +1,7 @@
 import 'app_localizations.dart';
 
 class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+  AppLocalizationsEn([super.locale = 'en']);
 
   @override
   String get welcome => 'Welcome';
@@ -63,4 +63,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading...';
+
+  // Register Page
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get createAccountSubtitle => 'Sign up to get started with your account';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get register => 'Sign Up';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get confirmPasswordRequired => 'Please confirm your password';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get registerError => 'Registration failed. Please try again.';
+
+  @override
+  String get termsAndConditions => 'I agree to the Terms and Conditions';
 }

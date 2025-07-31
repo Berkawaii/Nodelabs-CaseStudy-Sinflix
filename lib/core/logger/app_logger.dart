@@ -1,4 +1,5 @@
 import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
@@ -7,11 +8,7 @@ class AppLogger {
   late Logger _logger;
 
   AppLogger._internal() {
-    _logger = Logger(
-      printer: _AppLogPrinter(),
-      output: _AppLogOutput(),
-      filter: _AppLogFilter(),
-    );
+    _logger = Logger(printer: _AppLogPrinter(), output: _AppLogOutput(), filter: _AppLogFilter());
   }
 
   static AppLogger get instance {
@@ -41,12 +38,7 @@ class AppLogger {
   }
 
   // Network logging methods
-  void logRequest(
-    String method,
-    String url,
-    Map<String, dynamic>? headers,
-    dynamic body,
-  ) {
+  void logRequest(String method, String url, Map<String, dynamic>? headers, dynamic body) {
     if (kDebugMode) {
       info('🚀 REQUEST: $method $url');
       if (headers != null && headers.isNotEmpty) {

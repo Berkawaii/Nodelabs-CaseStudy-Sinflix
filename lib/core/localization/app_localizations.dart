@@ -7,8 +7,7 @@ import 'app_localizations_en.dart';
 import 'app_localizations_tr.dart';
 
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -16,8 +15,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
@@ -27,10 +25,7 @@ abstract class AppLocalizations {
         GlobalWidgetsLocalizations.delegate,
       ];
 
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('tr'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('tr')];
 
   // Login Screen
   String get welcome;
@@ -59,10 +54,22 @@ abstract class AppLocalizations {
   String get cancel;
   String get retry;
   String get loading;
+
+  // Register Screen
+  String get createAccount;
+  String get createAccountSubtitle;
+  String get fullName;
+  String get confirmPassword;
+  String get alreadyHaveAccount;
+  String get register;
+  String get nameRequired;
+  String get confirmPasswordRequired;
+  String get passwordsDoNotMatch;
+  String get registerError;
+  String get termsAndConditions;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -71,8 +78,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'tr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

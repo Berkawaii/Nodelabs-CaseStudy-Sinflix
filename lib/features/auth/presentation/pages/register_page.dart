@@ -13,23 +13,29 @@ import '../bloc/auth_state.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/social_login_button.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
   bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+  bool _acceptTerms = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -45,11 +51,11 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              appLogger.logNavigation('LoginPage', 'HomePage');
+              appLogger.logNavigation('RegisterPage', 'HomePage');
               // Navigate to home page
               context.go(AppRouter.home);
             } else if (state is AuthFailure) {
-              appLogger.warning('Login failed: ${state.message}');
+              appLogger.warning('Register failed: ${state.message}');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message), backgroundColor: AppColors.error),
               );
@@ -64,9 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const SizedBox(height: 60),
 
-                  // Welcome Text
+                  // Create Account Text
                   Text(
-                    l10n.welcome,
+                    l10n.createAccount,
                     style: AppTextStyles.h1.copyWith(
                       color: isDark ? AppColors.darkText : AppColors.lightText,
                     ),
@@ -77,12 +83,28 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Subtitle
                   Text(
-                    l10n.welcomeSubtitle,
+                    l10n.createAccountSubtitle,
                     style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
                     textAlign: TextAlign.center,
                   ),
 
                   const SizedBox(height: 48),
+
+                  // Name Field
+                  CustomTextField(
+                    controller: _nameController,
+                    label: l10n.fullName,
+                    keyboardType: TextInputType.name,
+                    prefixIcon: Icons.person_outline,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return l10n.nameRequired;
+                      }
+                      return null;
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
 
                   // Email Field
                   CustomTextField(
@@ -133,26 +155,63 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 16),
 
-                  // Forgot Password
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: () {
-                        // Navigate to forgot password
-                      },
-                      child: Text(
-                        l10n.forgotPassword,
-                        style: AppTextStyles.bodySmall.copyWith(
-                          color: isDark ? AppColors.darkText : AppColors.lightText,
-                          decoration: TextDecoration.underline,
-                        ),
+                  // Confirm Password Field
+                  CustomTextField(
+                    controller: _confirmPasswordController,
+                    label: l10n.confirmPassword,
+                    obscureText: !_isConfirmPasswordVisible,
+                    prefixIcon: Icons.lock_outline,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isConfirmPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                        color: AppColors.grey,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                        });
+                      },
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return l10n.confirmPasswordRequired;
+                      }
+                      if (value != _passwordController.text) {
+                        return l10n.passwordsDoNotMatch;
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 24),
 
-                  // Login Button
+                  // Terms and Conditions Checkbox
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _acceptTerms,
+                        onChanged: (value) {
+                          setState(() {
+                            _acceptTerms = value ?? false;
+                          });
+                        },
+                        activeColor: AppColors.primary,
+                        checkColor: Colors.white,
+                      ),
+                      Expanded(
+                        child: Text(
+                          l10n.termsAndConditions,
+                          style: AppTextStyles.bodySmall.copyWith(
+                            color: isDark ? AppColors.darkText : AppColors.lightText,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Register Button
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       final isLoading = state is AuthLoading;
@@ -160,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                       return SizedBox(
                         height: 56,
                         child: ElevatedButton(
-                          onPressed: isLoading ? null : _onLoginPressed,
+                          onPressed: isLoading || !_acceptTerms ? null : _onRegisterPressed,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
@@ -176,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 )
                               : Text(
-                                  l10n.login,
+                                  l10n.register,
                                   style: AppTextStyles.button.copyWith(color: Colors.white),
                                 ),
                         ),
@@ -241,21 +300,21 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 32),
 
-                  // Sign Up Link
+                  // Login Link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        l10n.dontHaveAccount,
+                        l10n.alreadyHaveAccount,
                         style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
                       ),
                       const SizedBox(width: 4),
                       TextButton(
                         onPressed: () {
-                          context.go(AppRouter.register);
+                          context.go(AppRouter.login);
                         },
                         child: Text(
-                          l10n.signUp,
+                          l10n.login,
                           style: AppTextStyles.bodyMedium.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w600,
@@ -273,14 +332,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onLoginPressed() {
-    if (_formKey.currentState!.validate()) {
-      appLogger.logFeatureEvent('Auth', 'Login button pressed');
+  void _onRegisterPressed() {
+    if (_formKey.currentState!.validate() && _acceptTerms) {
+      appLogger.logFeatureEvent('Auth', 'Register button pressed');
       context.read<AuthBloc>().add(
-        LoginRequested(email: _emailController.text.trim(), password: _passwordController.text),
+        RegisterRequested(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          name: _nameController.text.trim(),
+        ),
       );
     } else {
-      appLogger.warning('Login form validation failed');
+      appLogger.warning('Register form validation failed');
     }
   }
 }

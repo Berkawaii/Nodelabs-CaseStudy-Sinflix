@@ -1,7 +1,7 @@
 import 'app_localizations.dart';
 
 class AppLocalizationsTr extends AppLocalizations {
-  AppLocalizationsTr([String locale = 'tr']) : super(locale);
+  AppLocalizationsTr([super.locale = 'tr']);
 
   @override
   String get welcome => 'Merhaba';
@@ -44,8 +44,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get passwordTooShort => 'Şifre en az 6 karakter olmalıdır';
 
   @override
-  String get loginError =>
-      'Giriş başarısız. Lütfen bilgilerinizi kontrol edin.';
+  String get loginError => 'Giriş başarısız. Lütfen bilgilerinizi kontrol edin.';
 
   @override
   String get networkError => 'Ağ hatası. Lütfen bağlantınızı kontrol edin.';
@@ -64,4 +63,38 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get loading => 'Yükleniyor...';
+
+  // Register Page
+  @override
+  String get createAccount => 'Hesap Oluştur';
+
+  @override
+  String get createAccountSubtitle => 'Hesabınızla başlamak için kaydolun';
+
+  @override
+  String get fullName => 'Ad Soyad';
+
+  @override
+  String get confirmPassword => 'Şifre Tekrar';
+
+  @override
+  String get alreadyHaveAccount => 'Zaten hesabınız var mı?';
+
+  @override
+  String get register => 'Kaydol';
+
+  @override
+  String get nameRequired => 'Ad soyad gereklidir';
+
+  @override
+  String get confirmPasswordRequired => 'Lütfen şifrenizi tekrar girin';
+
+  @override
+  String get passwordsDoNotMatch => 'Şifreler eşleşmiyor';
+
+  @override
+  String get registerError => 'Kayıt başarısız. Lütfen tekrar deneyin.';
+
+  @override
+  String get termsAndConditions => 'Kullanım Koşullarını kabul ediyorum';
 }

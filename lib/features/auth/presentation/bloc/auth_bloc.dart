@@ -21,10 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthStatusChecked>(_onAuthStatusChecked);
   }
 
-  Future<void> _onLoginRequested(
-    LoginRequested event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
     appLogger.logAuthEvent('Login attempt started', data: {'email': event.email});
     emit(const AuthLoading());
 
@@ -42,10 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  Future<void> _onLogoutRequested(
-    LogoutRequested event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onLogoutRequested(LogoutRequested event, Emitter<AuthState> emit) async {
     appLogger.logAuthEvent('Logout attempt started');
     emit(const AuthLoading());
 
@@ -63,26 +57,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  Future<void> _onAuthStatusChecked(
-    AuthStatusChecked event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onAuthStatusChecked(AuthStatusChecked event, Emitter<AuthState> emit) async {
     appLogger.logAuthEvent('Auth status check started');
     emit(const AuthLoading());
 
     final result = await _getCurrentUserUseCase();
 
-    result.fold((failure) {
-      appLogger.logAuthEvent('Auth status check - user not authenticated');
-      emit(const AuthUnauthenticated());
-    }, (user) {
-      if (user != null) {
-        appLogger.logAuthEvent('Auth status check - user authenticated', userId: user.id);
-        emit(AuthAuthenticated(user));
-      } else {
-        appLogger.logAuthEvent('Auth status check - no user found');
+    result.fold(
+      (failure) {
+        appLogger.logAuthEvent('Auth status check - user not authenticated');
         emit(const AuthUnauthenticated());
-      }
-    });
+      },
+      (user) {
+        if (user != null) {
+          appLogger.logAuthEvent('Auth status check - user authenticated', userId: user.id);
+          emit(AuthAuthenticated(user));
+        } else {
+          appLogger.logAuthEvent('Auth status check - no user found');
+          emit(const AuthUnauthenticated());
+        }
+      },
+    );
   }
 }

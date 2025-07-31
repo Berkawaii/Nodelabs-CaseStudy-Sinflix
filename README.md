@@ -39,6 +39,7 @@ lib/
 ## 📱 Screenshots
 
 ### Login Screen
+
 - Modern UI design with dark/light theme support
 - Form validation
 - Social login options (Google, Apple, Facebook)
@@ -71,22 +72,26 @@ lib/
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Berkawaii/Nodelabs-CaseStudy-Sinflix.git
 cd Nodelabs-CaseStudy-Sinflix
 ```
 
 2. Install dependencies:
+
 ```bash
 flutter pub get
 ```
 
 3. Generate code:
+
 ```bash
 flutter packages pub run build_runner build
 ```
 
 4. Run the app:
+
 ```bash
 flutter run
 ```
@@ -96,6 +101,7 @@ flutter run
 ### API Configuration
 
 The app uses the following base URL for API calls:
+
 - Base URL: `https://caseapi.servicelabs.tech/`
 
 ### Authentication
@@ -103,6 +109,7 @@ The app uses the following base URL for API calls:
 Login endpoint: `POST /user/login`
 
 Request body:
+
 ```json
 {
   "email": "user@example.com",
@@ -111,6 +118,7 @@ Request body:
 ```
 
 Response:
+
 ```json
 {
   "response": {
@@ -131,6 +139,7 @@ Response:
 ## 🎨 Theming
 
 The app supports both dark and light themes with:
+
 - Custom color schemes
 - Google Fonts (Inter family)
 - Consistent design system
@@ -139,12 +148,14 @@ The app supports both dark and light themes with:
 ## 🌍 Localization
 
 Supported languages:
+
 - English (en)
 - Turkish (tr)
 
 ## 📝 Logging
 
 The app includes a comprehensive logging system:
+
 - Network request/response logging
 - Authentication event logging
 - Navigation logging
@@ -154,6 +165,7 @@ The app includes a comprehensive logging system:
 ## 🧪 Testing
 
 Run tests:
+
 ```bash
 flutter test
 ```
@@ -161,11 +173,13 @@ flutter test
 ## 📦 Build
 
 ### Android
+
 ```bash
 flutter build apk --release
 ```
 
 ### iOS
+
 ```bash
 flutter build ipa --release
 ```
@@ -185,6 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Berkay Acar**
+
 - GitHub: [@Berkawaii](https://github.com/Berkawaii)
 - Email: acar.berkai@gmail.com
 
