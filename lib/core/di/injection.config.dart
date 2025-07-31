@@ -22,6 +22,13 @@ import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/logout_usecase.dart' as _i48;
 import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
 import '../../features/auth/presentation/bloc/auth_bloc.dart' as _i797;
+import '../../features/movie/data/datasources/movie_api_service.dart' as _i835;
+import '../../features/movie/data/repositories/movie_repository_impl.dart'
+    as _i863;
+import '../../features/movie/domain/repositories/movie_repository.dart'
+    as _i224;
+import '../../features/movie/domain/usecases/get_movies_usecase.dart' as _i536;
+import '../../features/movie/presentation/bloc/movie_bloc.dart' as _i48;
 import '../network/api_client.dart' as _i557;
 import '../storage/token_storage.dart' as _i973;
 import 'network_module.dart' as _i567;
@@ -39,11 +46,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i367.AuthApi>(
       () => networkModule.authApi(gh<_i557.ApiClient>()),
     );
+    gh.singleton<_i835.MovieApiService>(
+      () => networkModule.movieApiService(gh<_i557.ApiClient>()),
+    );
     gh.lazySingleton<_i787.AuthRepository>(
       () => _i153.AuthRepositoryImpl(
         gh<_i367.AuthApi>(),
         gh<_i973.TokenStorage>(),
       ),
+    );
+    gh.factory<_i224.MovieRepository>(
+      () => _i863.MovieRepositoryImpl(gh<_i835.MovieApiService>()),
     );
     gh.factory<_i188.LoginUseCase>(
       () => _i188.LoginUseCase(gh<_i787.AuthRepository>()),
@@ -64,6 +77,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i48.LogoutUseCase>(),
         gh<_i17.GetCurrentUserUseCase>(),
       ),
+    );
+    gh.factory<_i536.GetMoviesUseCase>(
+      () => _i536.GetMoviesUseCase(gh<_i224.MovieRepository>()),
+    );
+    gh.factory<_i48.MovieBloc>(
+      () => _i48.MovieBloc(gh<_i536.GetMoviesUseCase>()),
     );
     return this;
   }
