@@ -80,31 +80,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       // Optimistic update - immediately update UI
       final updatedMovies = currentState.movies.map((movie) {
         if (movie.id == event.movieId) {
-          return Movie(
-            id: movie.id,
-            title: movie.title,
-            year: movie.year,
-            rated: movie.rated,
-            released: movie.released,
-            runtime: movie.runtime,
-            genre: movie.genre,
-            director: movie.director,
-            writer: movie.writer,
-            actors: movie.actors,
-            plot: movie.plot,
-            language: movie.language,
-            country: movie.country,
-            awards: movie.awards,
-            poster: movie.poster,
-            metascore: movie.metascore,
-            imdbRating: movie.imdbRating,
-            imdbVotes: movie.imdbVotes,
-            imdbID: movie.imdbID,
-            type: movie.type,
-            images: movie.images,
-            comingSoon: movie.comingSoon,
-            isFavorite: !movie.isFavorite, // Toggle favorite status
-          );
+          return movie.copyWith(isFavorite: !movie.isFavorite);
         }
         return movie;
       }).toList();

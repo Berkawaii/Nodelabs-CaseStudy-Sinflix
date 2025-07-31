@@ -5,12 +5,15 @@ import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
 import '../../features/auth/presentation/pages/splash_page.dart';
 import '../../features/main/presentation/pages/main_layout_page.dart';
+import '../../features/movie/domain/entities/movie.dart';
+import '../../features/movie/presentation/pages/movie_detail_page.dart';
 
 class AppRouter {
   static const String splash = '/';
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+  static const String movieDetail = '/movie/:movieId';
 
   static final GoRouter _router = GoRouter(
     initialLocation: splash,
@@ -25,6 +28,16 @@ class AppRouter {
 
       // Main App Routes
       GoRoute(path: home, name: 'home', builder: (context, state) => const MainLayoutPage()),
+
+      // Movie Detail Route
+      GoRoute(
+        path: '/movie/:movieId',
+        name: 'movieDetail',
+        builder: (context, state) {
+          final movie = state.extra as Movie;
+          return MovieDetailPage(movie: movie);
+        },
+      ),
     ],
 
     // Error handling

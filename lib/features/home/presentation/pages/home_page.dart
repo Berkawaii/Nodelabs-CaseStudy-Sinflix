@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injection.dart';
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../movie/domain/entities/movie.dart';
@@ -99,7 +100,6 @@ class _HomeViewState extends State<HomeView> {
           return state.when(
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
-            loadingMore: () => const Center(child: CircularProgressIndicator()),
             loaded: (movies, hasReachedMax, currentPage) => RefreshIndicator(
               onRefresh: () async {
                 context.read<MovieBloc>().add(const MovieEvent.refreshMovies());
@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
                   Icon(Icons.error_outline, size: 64, color: AppColors.grey),
                   const SizedBox(height: 16),
                   Text(
-                    'Bir hata oluştu',
+                    AppLocalizations.of(context)?.errorOccurred ?? 'Bir hata oluştu',
                     style: AppTextStyles.h3.copyWith(
                       color: isDark ? AppColors.darkText : AppColors.lightText,
                     ),
@@ -129,7 +129,7 @@ class _HomeViewState extends State<HomeView> {
                     onPressed: () {
                       context.read<MovieBloc>().add(const MovieEvent.loadMovies());
                     },
-                    child: const Text('Tekrar Dene'),
+                    child: Text(AppLocalizations.of(context)?.retry ?? 'Tekrar Dene'),
                   ),
                 ],
               ),

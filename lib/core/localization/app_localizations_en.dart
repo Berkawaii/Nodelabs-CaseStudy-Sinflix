@@ -53,6 +53,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unknownError => 'An unexpected error occurred';
 
   @override
+  String get errorOccurred => 'An error occurred';
+
+  @override
   String get ok => 'OK';
 
   @override
@@ -97,4 +100,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'I agree to the Terms and Conditions';
+
+  // Movie Detail Screen
+  @override
+  String get plot => 'Plot';
+
+  @override
+  String get genre => 'Genre';
+
+  @override
+  String get director => 'Director';
+
+  @override
+  String get cast => 'Cast';
+
+  @override
+  String get writer => 'Writer';
+
+  @override
+  String get additionalInformation => 'Additional Information';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get released => 'Released';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get country => 'Country';
+
+  @override
+  String get awards => 'Awards';
+
+  @override
+  String get metascore => 'Metascore';
+
+  @override
+  String get votes => 'votes';
 }

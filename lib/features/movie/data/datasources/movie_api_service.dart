@@ -14,5 +14,5 @@ abstract class MovieApiService {
   Future<ApiMovieResponse> getMovies({@Query('page') required int page});
 
   @POST('/movie/favorite/{favoriteId}')
-  Future<FavoriteResponse> toggleFavorite({@Path('favoriteId') required String favoriteId});
+  Future<dynamic> toggleFavorite({@Path('favoriteId') required String favoriteId});
 }

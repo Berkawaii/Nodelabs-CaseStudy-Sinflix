@@ -32,8 +32,9 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, bool>> toggleFavorite({required String movieId}) async {
     try {
-      final response = await apiService.toggleFavorite(favoriteId: movieId);
-      return Right(response.success);
+      await apiService.toggleFavorite(favoriteId: movieId);
+      // API call successful, return true (we'll update UI optimistically)
+      return const Right(true);
     } catch (e) {
       AppLogger.instance.error('Error toggling favorite: $e');
       return Left(ServerFailure('Network error: ${e.toString()}'));

@@ -53,6 +53,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unknownError => 'Beklenmeyen bir hata oluştu';
 
   @override
+  String get errorOccurred => 'Bir hata oluştu';
+
+  @override
   String get ok => 'Tamam';
 
   @override
@@ -97,4 +100,44 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'Kullanım Koşullarını kabul ediyorum';
+
+  // Movie Detail Screen
+  @override
+  String get plot => 'Konu';
+
+  @override
+  String get genre => 'Tür';
+
+  @override
+  String get director => 'Yönetmen';
+
+  @override
+  String get cast => 'Oyuncu Kadrosu';
+
+  @override
+  String get writer => 'Senarist';
+
+  @override
+  String get additionalInformation => 'Ek Bilgiler';
+
+  @override
+  String get gallery => 'Galeri';
+
+  @override
+  String get released => 'Çıkış Tarihi';
+
+  @override
+  String get language => 'Dil';
+
+  @override
+  String get country => 'Ülke';
+
+  @override
+  String get awards => 'Ödüller';
+
+  @override
+  String get metascore => 'Metaskor';
+
+  @override
+  String get votes => 'oy';
 }

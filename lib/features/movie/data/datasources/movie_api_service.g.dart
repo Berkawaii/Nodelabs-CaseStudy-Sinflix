@@ -45,12 +45,12 @@ class _MovieApiService implements MovieApiService {
   }
 
   @override
-  Future<FavoriteResponse> toggleFavorite({required String favoriteId}) async {
+  Future<dynamic> toggleFavorite({required String favoriteId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<FavoriteResponse>(
+    final _options = _setStreamType<dynamic>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -60,14 +60,8 @@ class _MovieApiService implements MovieApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late FavoriteResponse _value;
-    try {
-      _value = FavoriteResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
     return _value;
   }
 

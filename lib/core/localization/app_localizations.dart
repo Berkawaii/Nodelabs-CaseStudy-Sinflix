@@ -48,6 +48,7 @@ abstract class AppLocalizations {
   String get loginError;
   String get networkError;
   String get unknownError;
+  String get errorOccurred;
 
   // General
   String get ok;
@@ -67,6 +68,21 @@ abstract class AppLocalizations {
   String get passwordsDoNotMatch;
   String get registerError;
   String get termsAndConditions;
+
+  // Movie Detail Screen
+  String get plot;
+  String get genre;
+  String get director;
+  String get cast;
+  String get writer;
+  String get additionalInformation;
+  String get gallery;
+  String get released;
+  String get language;
+  String get country;
+  String get awards;
+  String get metascore;
+  String get votes;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

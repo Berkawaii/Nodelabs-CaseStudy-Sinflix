@@ -4,7 +4,6 @@ part of 'movie_bloc.dart';
 class MovieState with _$MovieState {
   const factory MovieState.initial() = _Initial;
   const factory MovieState.loading() = _Loading;
-  const factory MovieState.loadingMore() = _LoadingMore;
   const factory MovieState.loaded({
     required List<Movie> movies,
     required bool hasReachedMax,
