@@ -42,9 +42,9 @@ class _MainLayoutPageState extends State<MainLayoutPage> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+          backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
           selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.grey,
+          unselectedItemColor: isDark ? AppColors.lightBackground : AppColors.darkBackground,
           elevation: 0,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
