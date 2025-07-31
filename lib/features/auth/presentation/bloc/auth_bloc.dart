@@ -5,18 +5,25 @@ import '../../../../core/logger/app_logger.dart';
 import '../../domain/usecases/get_current_user_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
+import '../../domain/usecases/register_usecase.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase _loginUseCase;
+  final RegisterUseCase _registerUseCase;
   final LogoutUseCase _logoutUseCase;
   final GetCurrentUserUseCase _getCurrentUserUseCase;
 
-  AuthBloc(this._loginUseCase, this._logoutUseCase, this._getCurrentUserUseCase)
-    : super(const AuthInitial()) {
+  AuthBloc(
+    this._loginUseCase,
+    this._registerUseCase,
+    this._logoutUseCase,
+    this._getCurrentUserUseCase,
+  ) : super(const AuthInitial()) {
     on<LoginRequested>(_onLoginRequested);
+    on<RegisterRequested>(_onRegisterRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<AuthStatusChecked>(_onAuthStatusChecked);
   }
@@ -34,6 +41,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
       (user) {
         appLogger.logAuthEvent('Login successful', userId: user.id);
+        emit(AuthSuccess(user));
+      },
+    );
+  }
+
+  Future<void> _onRegisterRequested(RegisterRequested event, Emitter<AuthState> emit) async {
+    appLogger.logAuthEvent(
+      'Register attempt started',
+      data: {'email': event.email, 'name': event.name},
+    );
+    emit(const AuthLoading());
+
+    final result = await _registerUseCase(event.name, event.email, event.password);
+
+    result.fold(
+      (failure) {
+        appLogger.logAuthEvent('Register failed', data: {'error': failure.message});
+        emit(AuthFailure(failure.message));
+      },
+      (user) {
+        appLogger.logAuthEvent('Register successful', userId: user.id);
         emit(AuthSuccess(user));
       },
     );

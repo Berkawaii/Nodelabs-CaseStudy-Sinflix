@@ -20,6 +20,7 @@ import '../../features/auth/domain/usecases/get_current_user_usecase.dart'
     as _i17;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/logout_usecase.dart' as _i48;
+import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
 import '../../features/auth/presentation/bloc/auth_bloc.dart' as _i797;
 import '../network/api_client.dart' as _i557;
 import '../storage/token_storage.dart' as _i973;
@@ -53,9 +54,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i17.GetCurrentUserUseCase>(
       () => _i17.GetCurrentUserUseCase(gh<_i787.AuthRepository>()),
     );
+    gh.factory<_i941.RegisterUseCase>(
+      () => _i941.RegisterUseCase(gh<_i787.AuthRepository>()),
+    );
     gh.factory<_i797.AuthBloc>(
       () => _i797.AuthBloc(
         gh<_i188.LoginUseCase>(),
+        gh<_i941.RegisterUseCase>(),
         gh<_i48.LogoutUseCase>(),
         gh<_i17.GetCurrentUserUseCase>(),
       ),

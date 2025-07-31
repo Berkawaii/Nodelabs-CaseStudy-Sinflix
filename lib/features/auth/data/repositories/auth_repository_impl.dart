@@ -59,6 +59,47 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> register(String name, String email, String password) async {
+    try {
+      final request = {'name': name, 'email': email, 'password': password};
+
+      final response = await _authApi.register(request);
+
+      if (response.response.code == 200) {
+        final user = User(
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email,
+          photoUrl: response.data.photoUrl,
+          token: response.data.token,
+        );
+
+        // Token'ı güvenli şekilde sakla
+        await _tokenStorage.saveToken(response.data.token);
+
+        // User bilgilerini de sakla
+        final userJson = jsonEncode({
+          'id': user.id,
+          'name': user.name,
+          'email': user.email,
+          'photoUrl': user.photoUrl,
+        });
+        await _tokenStorage.saveUserData(userJson);
+
+        return Right(user);
+      } else {
+        return Left(ServerFailure(response.response.message));
+      }
+    } on DioException catch (e) {
+      return Left(NetworkErrorHandler.handleError(e));
+    } catch (e) {
+      return Left(
+        ServerFailure('An unexpected error occurred: ${e.toString()}'),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> logout() async {
     try {
       await _tokenStorage.clearAll();
