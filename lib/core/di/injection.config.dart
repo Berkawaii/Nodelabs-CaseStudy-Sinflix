@@ -41,8 +41,10 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
-    gh.singleton<_i557.ApiClient>(() => _i557.ApiClient());
     gh.singleton<_i973.TokenStorage>(() => _i973.TokenStorage());
+    gh.singleton<_i557.ApiClient>(
+      () => _i557.ApiClient(gh<_i973.TokenStorage>()),
+    );
     gh.singleton<_i367.AuthApi>(
       () => networkModule.authApi(gh<_i557.ApiClient>()),
     );

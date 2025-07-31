@@ -2,14 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../logger/app_logger.dart';
+import '../storage/token_storage.dart';
 
 @singleton
 class ApiClient {
   static const String baseUrl = 'https://caseapi.servicelabs.tech/';
 
   late final Dio _dio;
+  final TokenStorage _tokenStorage;
 
-  ApiClient() {
+  ApiClient(this._tokenStorage) {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -24,6 +26,19 @@ class ApiClient {
   }
 
   void _addInterceptors() {
+    // Token interceptor
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await _tokenStorage.getToken();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          handler.next(options);
+        },
+      ),
+    );
+
     // Custom logging interceptor
     _dio.interceptors.add(
       InterceptorsWrapper(
