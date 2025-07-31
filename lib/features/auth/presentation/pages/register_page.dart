@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_assets.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/logger/app_logger.dart';
 import '../../../../core/router/app_router.dart';
@@ -68,7 +69,14 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 60),
+                  // Logo
+                  Center(
+                    child: SizedBox(
+                      width: 200,
+                      height: 200,
+                      child: Image.asset(AppAssets.logo, fit: BoxFit.contain),
+                    ),
+                  ),
 
                   // Create Account Text
                   Text(
