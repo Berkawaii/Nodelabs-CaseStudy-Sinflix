@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/api_movie_response.dart';
+import '../models/favorite_response.dart';
 
 part 'movie_api_service.g.dart';
 
@@ -11,4 +12,7 @@ abstract class MovieApiService {
 
   @GET('/movie/list')
   Future<ApiMovieResponse> getMovies({@Query('page') required int page});
+
+  @POST('/movie/favorite/{favoriteId}')
+  Future<FavoriteResponse> toggleFavorite({@Path('favoriteId') required String favoriteId});
 }

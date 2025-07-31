@@ -8,18 +8,13 @@ import '../bloc/movie_bloc.dart';
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
-  const MovieCard({
-    super.key,
-    required this.movie,
-  });
+  const MovieCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Stack(
         children: [
           // Background gradient
@@ -29,10 +24,7 @@ class MovieCard extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.7),
-                ],
+                colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
                 stops: const [0.6, 1.0],
               ),
             ),
@@ -47,17 +39,11 @@ class MovieCard extends StatelessWidget {
               fit: BoxFit.cover,
               placeholder: (context, url) => Container(
                 color: Colors.grey[300],
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                child: const Center(child: CircularProgressIndicator()),
               ),
               errorWidget: (context, url, error) => Container(
                 color: Colors.grey[300],
-                child: const Icon(
-                  Icons.error,
-                  size: 50,
-                  color: Colors.grey,
-                ),
+                child: const Icon(Icons.error, size: 50, color: Colors.grey),
               ),
             ),
           ),
@@ -67,9 +53,7 @@ class MovieCard extends StatelessWidget {
             right: 12,
             child: GestureDetector(
               onTap: () {
-                context.read<MovieBloc>().add(
-                  MovieEvent.toggleFavorite(movieId: movie.id),
-                );
+                context.read<MovieBloc>().add(MovieEvent.toggleFavorite(movieId: movie.id));
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
@@ -100,10 +84,7 @@ class MovieCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.8),
-                  ],
+                  colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
                 ),
               ),
               child: Column(
@@ -123,25 +104,11 @@ class MovieCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.calendar_today,
-                        color: Colors.white70,
-                        size: 14,
-                      ),
+                      const Icon(Icons.calendar_today, color: Colors.white70, size: 14),
                       const SizedBox(width: 4),
-                      Text(
-                        movie.year,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text(movie.year, style: const TextStyle(color: Colors.white70, fontSize: 14)),
                       const Spacer(),
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 16,
-                      ),
+                      const Icon(Icons.star, color: Colors.amber, size: 16),
                       const SizedBox(width: 4),
                       Text(
                         movie.imdbRating,

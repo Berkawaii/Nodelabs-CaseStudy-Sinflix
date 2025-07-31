@@ -44,7 +44,14 @@ class _HomeViewState extends State<HomeView> {
 
   void _onScroll() {
     if (_isBottom) {
-      context.read<MovieBloc>().add(const MovieEvent.loadMoreMovies());
+      final currentState = context.read<MovieBloc>().state;
+      currentState.whenOrNull(
+        loaded: (movies, hasReachedMax, currentPage) {
+          if (!hasReachedMax) {
+            context.read<MovieBloc>().add(const MovieEvent.loadMoreMovies());
+          }
+        },
+      );
     }
   }
 
@@ -92,10 +99,7 @@ class _HomeViewState extends State<HomeView> {
           return state.when(
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
-            loadingMore: () {
-              // Get current loaded state movies for loadingMore
-              return _buildMovieGrid([], isLoadingMore: true);
-            },
+            loadingMore: () => const Center(child: CircularProgressIndicator()),
             loaded: (movies, hasReachedMax, currentPage) => RefreshIndicator(
               onRefresh: () async {
                 context.read<MovieBloc>().add(const MovieEvent.refreshMovies());
@@ -138,39 +142,28 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildMovieGrid(List<Movie> movies, {bool isLoadingMore = false}) {
     return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Expanded(
-            child: GridView.builder(
-              controller: _scrollController,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: movies.length + (isLoadingMore ? 2 : 0),
-              itemBuilder: (context, index) {
-                if (index >= movies.length) {
-                  // Loading more indicators
-                  return Card(
-                    color: AppColors.grey.withOpacity(0.1),
-                    child: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
-                  );
-                }
+      padding: const EdgeInsets.all(12),
+      child: GridView.builder(
+        controller: _scrollController,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.6, // Daha yüksek kartlar için
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+        ),
+        itemCount: movies.length + (isLoadingMore ? 2 : 0),
+        itemBuilder: (context, index) {
+          if (index >= movies.length) {
+            // Loading more indicators
+            return Card(
+              color: AppColors.grey.withOpacity(0.1),
+              child: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+            );
+          }
 
-                final movie = movies[index];
-                return MovieCard(
-                  movie: movie,
-                  onTap: () {
-                    // Navigate to movie detail
-                  },
-                );
-              },
-            ),
-          ),
-        ],
+          final movie = movies[index];
+          return MovieCard(movie: movie);
+        },
       ),
     );
   }

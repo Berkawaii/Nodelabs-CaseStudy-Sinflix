@@ -28,6 +28,8 @@ import '../../features/movie/data/repositories/movie_repository_impl.dart'
 import '../../features/movie/domain/repositories/movie_repository.dart'
     as _i224;
 import '../../features/movie/domain/usecases/get_movies_usecase.dart' as _i536;
+import '../../features/movie/domain/usecases/toggle_favorite_usecase.dart'
+    as _i211;
 import '../../features/movie/presentation/bloc/movie_bloc.dart' as _i48;
 import '../network/api_client.dart' as _i557;
 import '../storage/token_storage.dart' as _i973;
@@ -83,8 +85,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i536.GetMoviesUseCase>(
       () => _i536.GetMoviesUseCase(gh<_i224.MovieRepository>()),
     );
+    gh.factory<_i211.ToggleFavoriteUseCase>(
+      () => _i211.ToggleFavoriteUseCase(gh<_i224.MovieRepository>()),
+    );
     gh.factory<_i48.MovieBloc>(
-      () => _i48.MovieBloc(gh<_i536.GetMoviesUseCase>()),
+      () => _i48.MovieBloc(
+        gh<_i536.GetMoviesUseCase>(),
+        gh<_i211.ToggleFavoriteUseCase>(),
+      ),
     );
     return this;
   }

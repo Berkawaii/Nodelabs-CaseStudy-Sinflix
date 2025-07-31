@@ -28,4 +28,15 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure('Network error: ${e.toString()}'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> toggleFavorite({required String movieId}) async {
+    try {
+      final response = await apiService.toggleFavorite(favoriteId: movieId);
+      return Right(response.success);
+    } catch (e) {
+      AppLogger.instance.error('Error toggling favorite: $e');
+      return Left(ServerFailure('Network error: ${e.toString()}'));
+    }
+  }
 }
