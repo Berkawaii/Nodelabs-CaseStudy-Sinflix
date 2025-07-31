@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
 import '../../features/auth/presentation/pages/splash_page.dart';
+import '../../features/main/presentation/pages/main_layout_page.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -23,7 +24,7 @@ class AppRouter {
       GoRoute(path: register, name: 'register', builder: (context, state) => const RegisterPage()),
 
       // Main App Routes
-      GoRoute(path: home, name: 'home', builder: (context, state) => const HomePage()),
+      GoRoute(path: home, name: 'home', builder: (context, state) => const MainLayoutPage()),
     ],
 
     // Error handling
@@ -47,38 +48,4 @@ class AppRouter {
   );
 
   static GoRouter get router => _router;
-}
-
-// Temporary HomePage widget - replace with actual implementation later
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sinflix'),
-        backgroundColor: Colors.red,
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(icon: const Icon(Icons.logout), onPressed: () => context.go(AppRouter.login)),
-        ],
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.movie, size: 100, color: Colors.red),
-            SizedBox(height: 20),
-            Text(
-              'Welcome to Sinflix!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text('Movies and series coming soon...', style: TextStyle(fontSize: 16)),
-          ],
-        ),
-      ),
-    );
-  }
 }
