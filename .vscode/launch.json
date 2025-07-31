@@ -2,30 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug (Development)",
+            "name": "Debug",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart",
-            "args": [
-                "--flavor",
-                "development"
-            ],
-            "env": {
-                "FLUTTER_ENV": "development"
-            }
-        },
-        {
-            "name": "Debug (Production)",
-            "request": "launch",
-            "type": "dart",
-            "program": "lib/main.dart",
-            "args": [
-                "--flavor",
-                "production"
-            ],
-            "env": {
-                "FLUTTER_ENV": "production"
-            }
+            "program": "lib/main.dart"
         },
         {
             "name": "Profile Mode",

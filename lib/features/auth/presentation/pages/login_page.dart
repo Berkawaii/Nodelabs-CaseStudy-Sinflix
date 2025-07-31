@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/logger/app_logger.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -37,9 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? AppColors.darkBackground
-          : AppColors.lightBackground,
+      backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
       body: SafeArea(
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -50,10 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             } else if (state is AuthFailure) {
               appLogger.warning('Login failed: ${state.message}');
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: AppColors.error,
-                ),
+                SnackBar(content: Text(state.message), backgroundColor: AppColors.error),
               );
             }
           },
@@ -80,9 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Subtitle
                   Text(
                     l10n.welcomeSubtitle,
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.grey,
-                    ),
+                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
                     textAlign: TextAlign.center,
                   ),
 
@@ -98,9 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return l10n.emailRequired;
                       }
-                      if (!RegExp(
-                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                      ).hasMatch(value)) {
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
                         return l10n.emailInvalid;
                       }
                       return null;
@@ -117,9 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     prefixIcon: Icons.lock_outline,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                        _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                         color: AppColors.grey,
                       ),
                       onPressed: () {
@@ -151,9 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         l10n.forgotPassword,
                         style: AppTextStyles.bodySmall.copyWith(
-                          color: isDark
-                              ? AppColors.darkText
-                              : AppColors.lightText,
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
                           decoration: TextDecoration.underline,
                         ),
                       ),
@@ -174,9 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
                           child: isLoading
                               ? const SizedBox(
@@ -184,16 +170,12 @@ class _LoginPageState extends State<LoginPage> {
                                   width: 20,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.white,
-                                    ),
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
                               : Text(
                                   l10n.login,
-                                  style: AppTextStyles.button.copyWith(
-                                    color: Colors.white,
-                                  ),
+                                  style: AppTextStyles.button.copyWith(color: Colors.white),
                                 ),
                         ),
                       );
@@ -207,25 +189,19 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Expanded(
                         child: Divider(
-                          color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder,
+                          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           l10n.orContinueWith,
-                          style: AppTextStyles.bodySmall.copyWith(
-                            color: AppColors.grey,
-                          ),
+                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey),
                         ),
                       ),
                       Expanded(
                         child: Divider(
-                          color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder,
+                          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                         ),
                       ),
                     ],
@@ -242,27 +218,21 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           // Google login
                         },
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : AppColors.lightCard,
+                        backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
                       ),
                       SocialLoginButton(
                         icon: Icons.apple,
                         onPressed: () {
                           // Apple login
                         },
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : AppColors.lightCard,
+                        backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
                       ),
                       SocialLoginButton(
                         icon: Icons.facebook,
                         onPressed: () {
                           // Facebook login
                         },
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : AppColors.lightCard,
+                        backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
                       ),
                     ],
                   ),
@@ -275,9 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         l10n.dontHaveAccount,
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.grey,
-                        ),
+                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
                       ),
                       const SizedBox(width: 4),
                       TextButton(
@@ -307,10 +275,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       appLogger.logFeatureEvent('Auth', 'Login button pressed');
       context.read<AuthBloc>().add(
-        LoginRequested(
-          email: _emailController.text.trim(),
-          password: _passwordController.text,
-        ),
+        LoginRequested(email: _emailController.text.trim(), password: _passwordController.text),
       );
     } else {
       appLogger.warning('Login form validation failed');
