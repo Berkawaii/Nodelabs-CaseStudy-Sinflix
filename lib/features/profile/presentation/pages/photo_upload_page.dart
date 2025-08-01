@@ -50,21 +50,15 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
   }
 
   void _showErrorSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
-      ),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.red));
   }
 
   void _showSuccessSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.green,
-      ),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.green));
   }
 
   @override
@@ -86,7 +80,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
           },
           builder: (context, state) {
             final isUploading = state is PhotoUploading;
-            
+
             return Padding(
               padding: const EdgeInsets.all(24),
               child: Column(
@@ -137,10 +131,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
 
                   Text(
                     'Resources out incentivize\nrelaxation floor loss cc.',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.grey,
-                      height: 1.5,
-                    ),
+                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey, height: 1.5),
                     textAlign: TextAlign.center,
                   ),
 
@@ -166,16 +157,9 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                           child: _selectedImage != null
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(22),
-                                  child: Image.file(
-                                    _selectedImage!,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: Image.file(_selectedImage!, fit: BoxFit.cover),
                                 )
-                              : Icon(
-                                  Icons.add,
-                                  size: 48,
-                                  color: AppColors.grey,
-                                ),
+                              : Icon(Icons.add, size: 48, color: AppColors.grey),
                         ),
                       ),
                     ),
@@ -192,19 +176,14 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         elevation: 0,
                       ),
                       child: isUploading
                           ? const SizedBox(
                               width: 24,
                               height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
+                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                             )
                           : Text(
                               'Devam Et',

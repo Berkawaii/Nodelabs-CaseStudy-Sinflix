@@ -20,11 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       final userProfile = await _profileApiService.getUserProfile();
       final favoriteMovies = await _profileApiService.getFavoriteMovies();
-      
-      emit(ProfileLoaded(
-        userProfile: userProfile,
-        favoriteMovies: favoriteMovies,
-      ));
+
+      emit(ProfileLoaded(userProfile: userProfile, favoriteMovies: favoriteMovies));
     } catch (e) {
       emit(ProfileError(message: e.toString()));
     }
@@ -35,10 +32,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final currentState = state as ProfileLoaded;
       try {
         final favoriteMovies = await _profileApiService.getFavoriteMovies();
-        emit(ProfileLoaded(
-          userProfile: currentState.userProfile,
-          favoriteMovies: favoriteMovies,
-        ));
+        emit(ProfileLoaded(userProfile: currentState.userProfile, favoriteMovies: favoriteMovies));
       } catch (e) {
         emit(ProfileError(message: e.toString()));
       }
@@ -50,7 +44,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       final photoUrl = await _profileApiService.uploadPhoto(event.imageFile);
       emit(PhotoUploadSuccess(photoUrl: photoUrl));
-      
+
       // Reload profile after successful upload
       add(const LoadProfile());
     } catch (e) {

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/user_profile.dart';
 import '../../../movie/domain/entities/movie.dart';
+import '../../domain/entities/user_profile.dart';
 
 abstract class ProfileState extends Equatable {
   const ProfileState();
@@ -29,10 +29,7 @@ class ProfileLoaded extends ProfileState {
   final UserProfile userProfile;
   final List<Movie> favoriteMovies;
 
-  const ProfileLoaded({
-    required this.userProfile,
-    required this.favoriteMovies,
-  });
+  const ProfileLoaded({required this.userProfile, required this.favoriteMovies});
 
   @override
   List<Object> get props => [userProfile, favoriteMovies];

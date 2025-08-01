@@ -31,11 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _navigateToPhotoUpload(BuildContext context) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const PhotoUploadPage(),
-      ),
+      MaterialPageRoute(builder: (context) => const PhotoUploadPage()),
     );
-    
+
     // If photo was uploaded successfully, reload profile
     if (result == true) {
       _loadProfileData();

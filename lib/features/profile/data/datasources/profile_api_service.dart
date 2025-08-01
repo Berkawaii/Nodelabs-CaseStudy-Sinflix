@@ -63,10 +63,7 @@ class ProfileApiService {
         'file': await MultipartFile.fromFile(imageFile.path, filename: fileName),
       });
 
-      final response = await _apiClient.dio.post(
-        '/user/upload_photo',
-        data: formData,
-      );
+      final response = await _apiClient.dio.post('/user/upload_photo', data: formData);
 
       if (response.statusCode == 200) {
         final jsonData = response.data;
