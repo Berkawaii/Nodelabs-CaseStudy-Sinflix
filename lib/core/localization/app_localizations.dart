@@ -55,6 +55,9 @@ abstract class AppLocalizations {
   String get cancel;
   String get retry;
   String get loading;
+  String get unlockNewEpisodes;
+  String get chooseJetonPackage;
+  String get perWeek;
 
   // Register Screen
   String get createAccount;

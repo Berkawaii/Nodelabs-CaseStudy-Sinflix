@@ -240,4 +240,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get seeAllJetons => 'See All Tokens';
+
+  @override
+  String get unlockNewEpisodes =>
+      'Choose your token package to earn bonus\nand unlock new episodes!';
+
+  @override
+  String get chooseJetonPackage => 'Choose a token package to unlock';
+
+  @override
+  String get perWeek => 'Per week';
 }

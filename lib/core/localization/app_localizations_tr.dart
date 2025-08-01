@@ -240,4 +240,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get seeAllJetons => 'Tüm Jetonları Gör';
+
+  @override
+  String get unlockNewEpisodes =>
+      'Jeton paketin\'ni seçerek bonus\nkazanın ve yeni bölümlerin kilidini açın!';
+
+  @override
+  String get chooseJetonPackage => 'Kilidi açmak için bir jeton paketi seçin';
+
+  @override
+  String get perWeek => 'Başına haftalık';
 }
