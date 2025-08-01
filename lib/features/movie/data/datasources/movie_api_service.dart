@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/api_movie_response.dart';
-import '../models/favorite_response.dart';
 
 part 'movie_api_service.g.dart';
 
