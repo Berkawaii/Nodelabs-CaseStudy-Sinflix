@@ -95,6 +95,19 @@ abstract class AppLocalizations {
   String get noMoviesAvailable;
   String get pleaseTryAgain;
   String get addedToFavorites;
+
+  // Profile Screen
+  String get profileDetail;
+  String get limitedOffer;
+  String get addPhoto;
+  String get favoriteMovies;
+  String get uploadPhotos;
+  String get uploadPhotosDescription;
+  String get continueButton;
+  String get selectPhoto;
+  String get photoUploadedSuccessfully;
+  String get photoUploadError;
+  String get photoSelectError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

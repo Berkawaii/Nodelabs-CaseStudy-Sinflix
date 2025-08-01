@@ -171,4 +171,37 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get addedToFavorites => 'favorilere eklendi!';
+
+  @override
+  String get profileDetail => 'Profil Detayı';
+
+  @override
+  String get limitedOffer => 'Sınırlı Teklif';
+
+  @override
+  String get addPhoto => 'Fotoğraf Ekle';
+
+  @override
+  String get favoriteMovies => 'Beğendiğim Filmler';
+
+  @override
+  String get uploadPhotos => 'Fotoğraflarınızı Yükleyin';
+
+  @override
+  String get uploadPhotosDescription => 'Resources out incentivize\nrelaxation floor loss cc.';
+
+  @override
+  String get continueButton => 'Devam Et';
+
+  @override
+  String get selectPhoto => 'Lütfen bir fotoğraf seçin';
+
+  @override
+  String get photoUploadedSuccessfully => 'Fotoğraf başarıyla yüklendi';
+
+  @override
+  String get photoUploadError => 'Fotoğraf yüklenirken bir hata oluştu';
+
+  @override
+  String get photoSelectError => 'Fotoğraf seçilirken bir hata oluştu';
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../bloc/profile_bloc.dart';
@@ -22,6 +23,8 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage() async {
+    final l10n = AppLocalizations.of(context)!;
+    
     try {
       final XFile? image = await _picker.pickImage(
         source: ImageSource.gallery,
@@ -36,13 +39,15 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
         });
       }
     } catch (e) {
-      _showErrorSnackBar('Fotoğraf seçilirken bir hata oluştu');
+      _showErrorSnackBar(l10n.photoSelectError);
     }
   }
 
   Future<void> _uploadPhoto() async {
+    final l10n = AppLocalizations.of(context)!;
+    
     if (_selectedImage == null) {
-      _showErrorSnackBar('Lütfen bir fotoğraf seçin');
+      _showErrorSnackBar(l10n.selectPhoto);
       return;
     }
 
@@ -65,6 +70,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
@@ -72,10 +78,10 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
         child: BlocConsumer<ProfileBloc, ProfileState>(
           listener: (context, state) {
             if (state is PhotoUploadSuccess) {
-              _showSuccessSnackBar('Fotoğraf başarıyla yüklendi');
+              _showSuccessSnackBar(l10n.photoUploadedSuccessfully);
               Navigator.pop(context, true);
             } else if (state is ProfileError) {
-              _showErrorSnackBar(state.message);
+              _showErrorSnackBar(l10n.photoUploadError);
             }
           },
           builder: (context, state) {
@@ -106,7 +112,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        'Profil Detayı',
+                        l10n.profileDetail,
                         style: AppTextStyles.h2.copyWith(
                           color: isDark ? AppColors.darkText : AppColors.lightText,
                           fontWeight: FontWeight.bold,
@@ -119,7 +125,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
 
                   // Title and Description
                   Text(
-                    'Fotoğraflarınızı Yükleyin',
+                    l10n.uploadPhotos,
                     style: AppTextStyles.h2.copyWith(
                       color: isDark ? AppColors.darkText : AppColors.lightText,
                       fontWeight: FontWeight.bold,
@@ -130,7 +136,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                   const SizedBox(height: 16),
 
                   Text(
-                    'Resources out incentivize\nrelaxation floor loss cc.',
+                    l10n.uploadPhotosDescription,
                     style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey, height: 1.5),
                     textAlign: TextAlign.center,
                   ),
@@ -186,7 +192,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                               child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                             )
                           : Text(
-                              'Devam Et',
+                              l10n.continueButton,
                               style: AppTextStyles.button.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

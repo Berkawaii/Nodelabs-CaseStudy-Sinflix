@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../movie/presentation/pages/movie_detail_page.dart';
@@ -83,6 +84,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildProfileContent(BuildContext context, ProfileLoaded state, bool isDark) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return CustomScrollView(
       slivers: [
         // Custom App Bar
@@ -92,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
           pinned: true,
           automaticallyImplyLeading: false,
           title: Text(
-            'Profil Detayı',
+            l10n.profileDetail,
             style: AppTextStyles.h2.copyWith(
               color: isDark ? AppColors.darkText : AppColors.lightText,
               fontWeight: FontWeight.bold,
@@ -109,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Icon(Icons.favorite, color: Colors.white, size: 16),
                   const SizedBox(width: 4),
                   Text(
-                    'Sınırlı Teklif',
+                    l10n.limitedOffer,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -192,7 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          'Fotoğraf Ekle',
+                          l10n.addPhoto,
                           style: AppTextStyles.bodySmall.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -210,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Beğendiğim Filmler',
+                      l10n.favoriteMovies,
                       style: AppTextStyles.h3.copyWith(
                         color: isDark ? AppColors.darkText : AppColors.lightText,
                         fontWeight: FontWeight.bold,

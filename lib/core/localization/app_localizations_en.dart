@@ -171,4 +171,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addedToFavorites => 'added to favorites!';
+
+  @override
+  String get profileDetail => 'Profile Detail';
+
+  @override
+  String get limitedOffer => 'Limited Offer';
+
+  @override
+  String get addPhoto => 'Add Photo';
+
+  @override
+  String get favoriteMovies => 'Favorite Movies';
+
+  @override
+  String get uploadPhotos => 'Upload Your Photos';
+
+  @override
+  String get uploadPhotosDescription => 'Resources out incentivize\nrelaxation floor loss cc.';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get selectPhoto => 'Please select a photo';
+
+  @override
+  String get photoUploadedSuccessfully => 'Photo uploaded successfully';
+
+  @override
+  String get photoUploadError => 'Error occurred while uploading photo';
+
+  @override
+  String get photoSelectError => 'Error occurred while selecting photo';
 }
