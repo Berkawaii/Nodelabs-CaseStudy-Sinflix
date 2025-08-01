@@ -204,4 +204,40 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get photoSelectError => 'Fotoğraf seçilirken bir hata oluştu';
+
+  @override
+  String get limitedOfferTitle => 'Limited Offer';
+
+  @override
+  String get limitedOfferSubtitle => 'Bir hafta boyunca premium hesap deneyimini yaşa!';
+
+  @override
+  String get bonusesYouWillReceive => 'Alacağın Bonuslar:';
+
+  @override
+  String get premiumAccount => 'Premium Hesap';
+
+  @override
+  String get moreMatching => 'Daha Fazla Eşleşme';
+
+  @override
+  String get priorityExit => 'Öncelikli Çıkış';
+
+  @override
+  String get moreLikes => 'Daha Fazla Beğeni';
+
+  @override
+  String get selectJetonPackage => 'Jeton Paketi Seç';
+
+  @override
+  String get jeton => 'Jeton';
+
+  @override
+  String get jetons => 'Jeton';
+
+  @override
+  String get weeklyOffer => 'Haftalık Teklif';
+
+  @override
+  String get seeAllJetons => 'Tüm Jetonları Gör';
 }

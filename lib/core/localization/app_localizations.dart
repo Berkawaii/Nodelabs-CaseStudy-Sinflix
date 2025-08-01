@@ -108,6 +108,20 @@ abstract class AppLocalizations {
   String get photoUploadedSuccessfully;
   String get photoUploadError;
   String get photoSelectError;
+
+  // Limited Offer
+  String get limitedOfferTitle;
+  String get limitedOfferSubtitle;
+  String get bonusesYouWillReceive;
+  String get premiumAccount;
+  String get moreMatching;
+  String get priorityExit;
+  String get moreLikes;
+  String get selectJetonPackage;
+  String get jeton;
+  String get jetons;
+  String get weeklyOffer;
+  String get seeAllJetons;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

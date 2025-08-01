@@ -204,4 +204,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get photoSelectError => 'Error occurred while selecting photo';
+
+  @override
+  String get limitedOfferTitle => 'Limited Offer';
+
+  @override
+  String get limitedOfferSubtitle => 'Experience premium account for a week!';
+
+  @override
+  String get bonusesYouWillReceive => 'Bonuses You Will Receive:';
+
+  @override
+  String get premiumAccount => 'Premium Account';
+
+  @override
+  String get moreMatching => 'More Matching';
+
+  @override
+  String get priorityExit => 'Priority Exit';
+
+  @override
+  String get moreLikes => 'More Likes';
+
+  @override
+  String get selectJetonPackage => 'Select Token Package';
+
+  @override
+  String get jeton => 'Token';
+
+  @override
+  String get jetons => 'Tokens';
+
+  @override
+  String get weeklyOffer => 'Weekly Offer';
+
+  @override
+  String get seeAllJetons => 'See All Tokens';
 }

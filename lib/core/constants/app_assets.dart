@@ -6,6 +6,7 @@ class AppAssets {
   static const String logoTransparent = '$imagesPath/logo_transparent.png';
   static const String splashBackground = '$imagesPath/splash_background.png';
   static const String loginBackground = '$imagesPath/login_background.png';
+  static const String modalBonus = '$imagesPath/modal_bonus.png';
 
   // Icons
   static const String iconsPath = 'assets/icons';

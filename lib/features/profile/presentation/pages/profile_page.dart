@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../shared/widgets/limited_offer_modal.dart';
 import '../../../movie/presentation/pages/movie_detail_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
@@ -39,6 +40,16 @@ class _ProfilePageState extends State<ProfilePage> {
     if (result == true) {
       _loadProfileData();
     }
+  }
+
+  void _showLimitedOfferModal(BuildContext context) {
+    showModalBottomSheet(
+      requestFocus: true,
+      context: context,
+
+      isScrollControlled: true,
+      builder: (context) => const LimitedOfferModal(),
+    );
   }
 
   @override
@@ -102,23 +113,29 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.favorite, color: Colors.white, size: 16),
-                  const SizedBox(width: 4),
-                  Text(
-                    l10n.limitedOffer,
-                    style: AppTextStyles.bodySmall.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () => _showLimitedOfferModal(context),
+              child: Container(
+                margin: const EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.favorite, color: Colors.white, size: 16),
+                    const SizedBox(width: 4),
+                    Text(
+                      l10n.limitedOffer,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
