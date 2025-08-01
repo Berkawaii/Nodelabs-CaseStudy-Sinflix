@@ -8,6 +8,7 @@ import '../../../movie/presentation/pages/movie_detail_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
 import '../bloc/profile_state.dart';
+import 'photo_upload_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -25,6 +26,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _loadProfileData() {
     context.read<ProfileBloc>().add(const LoadProfile());
+  }
+
+  Future<void> _navigateToPhotoUpload(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PhotoUploadPage(),
+      ),
+    );
+    
+    // If photo was uploaded successfully, reload profile
+    if (result == true) {
+      _loadProfileData();
+    }
   }
 
   @override
@@ -123,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 80,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.grey.withOpacity(0.3), width: 2),
+                        border: Border.all(color: AppColors.grey.withValues(alpha: 0.3), width: 2),
                       ),
                       child: ClipOval(
                         child: state.userProfile.photoUrl.isNotEmpty
@@ -131,16 +146,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 imageUrl: state.userProfile.photoUrl,
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => Container(
-                                  color: AppColors.grey.withOpacity(0.3),
+                                  color: AppColors.grey.withValues(alpha: 0.3),
                                   child: Icon(Icons.person, size: 40, color: AppColors.grey),
                                 ),
                                 errorWidget: (context, url, error) => Container(
-                                  color: AppColors.grey.withOpacity(0.3),
+                                  color: AppColors.grey.withValues(alpha: 0.3),
                                   child: Icon(Icons.person, size: 40, color: AppColors.grey),
                                 ),
                               )
                             : Container(
-                                color: AppColors.grey.withOpacity(0.3),
+                                color: AppColors.grey.withValues(alpha: 0.3),
                                 child: Icon(Icons.person, size: 40, color: AppColors.grey),
                               ),
                       ),
@@ -170,17 +185,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
 
                     // Photo Add Button
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        'Fotoğraf Ekle',
-                        style: AppTextStyles.bodySmall.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () => _navigateToPhotoUpload(context),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          'Fotoğraf Ekle',
+                          style: AppTextStyles.bodySmall.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -221,8 +239,8 @@ class _ProfilePageState extends State<ProfilePage> {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.75,
-        crossAxisSpacing: 16,
+        childAspectRatio: 0.7,
+        crossAxisSpacing: 12,
         mainAxisSpacing: 16,
       ),
       itemCount: favoriteMovies.length,
@@ -232,73 +250,117 @@ class _ProfilePageState extends State<ProfilePage> {
           onTap: () => _showMovieDetail(context, movie),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
+                  color: Colors.black.withValues(alpha: 0.15),
+                  blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
               ],
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Movie Poster
-                Expanded(
-                  flex: 4,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-                    child: CachedNetworkImage(
-                      imageUrl: movie.poster.replaceFirst('http://', 'https://'),
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      placeholder: (context, url) => Container(
-                        color: AppColors.grey.withOpacity(0.3),
-                        child: const Center(child: CircularProgressIndicator()),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        color: AppColors.grey.withOpacity(0.3),
-                        child: const Icon(Icons.movie, size: 50, color: Colors.grey),
-                      ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Movie Poster
+                  CachedNetworkImage(
+                    imageUrl: movie.poster.replaceFirst('http://', 'https://'),
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      color: AppColors.grey.withValues(alpha: 0.3),
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: AppColors.grey.withValues(alpha: 0.3),
+                      child: const Icon(Icons.movie, size: 50, color: Colors.grey),
                     ),
                   ),
-                ),
-                // Movie Info
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
+                  // Gradient Overlay
+                  Container(
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkCard : AppColors.lightCard,
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          movie.title,
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: isDark ? AppColors.darkText : AppColors.lightText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          movie.director,
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.3),
+                          Colors.black.withValues(alpha: 0.8),
+                        ],
+                        stops: const [0.4, 0.7, 1.0],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  // Movie Info at Bottom
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            movie.title,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.amber, size: 14),
+                              const SizedBox(width: 4),
+                              Text(
+                                movie.imdbRating,
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const Spacer(),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  movie.year,
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Favorite Icon
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.6),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(Icons.favorite, color: Colors.red, size: 16),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

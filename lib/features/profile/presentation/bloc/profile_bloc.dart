@@ -12,6 +12,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._profileApiService) : super(ProfileInitial()) {
     on<LoadProfile>(_onLoadProfile);
     on<LoadFavoriteMovies>(_onLoadFavoriteMovies);
+    on<UploadPhoto>(_onUploadPhoto);
   }
 
   Future<void> _onLoadProfile(LoadProfile event, Emitter<ProfileState> emit) async {
@@ -41,6 +42,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       } catch (e) {
         emit(ProfileError(message: e.toString()));
       }
+    }
+  }
+
+  Future<void> _onUploadPhoto(UploadPhoto event, Emitter<ProfileState> emit) async {
+    emit(PhotoUploading());
+    try {
+      final photoUrl = await _profileApiService.uploadPhoto(event.imageFile);
+      emit(PhotoUploadSuccess(photoUrl: photoUrl));
+      
+      // Reload profile after successful upload
+      add(const LoadProfile());
+    } catch (e) {
+      emit(ProfileError(message: e.toString()));
     }
   }
 }

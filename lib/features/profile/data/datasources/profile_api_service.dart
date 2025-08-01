@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -46,6 +48,31 @@ class ProfileApiService {
         }
       } else {
         throw Exception('Failed to get favorite movies: ${response.statusCode}');
+      }
+    } on DioException catch (e) {
+      throw Exception('Network error: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error: $e');
+    }
+  }
+
+  Future<String> uploadPhoto(File imageFile) async {
+    try {
+      String fileName = imageFile.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(imageFile.path, filename: fileName),
+      });
+
+      final response = await _apiClient.dio.post(
+        '/user/upload_photo',
+        data: formData,
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = response.data;
+        return jsonData['photoUrl'] ?? '';
+      } else {
+        throw Exception('Failed to upload photo: ${response.statusCode}');
       }
     } on DioException catch (e) {
       throw Exception('Network error: ${e.message}');

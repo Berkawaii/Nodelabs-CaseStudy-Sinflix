@@ -14,6 +14,17 @@ class ProfileInitial extends ProfileState {}
 
 class ProfileLoading extends ProfileState {}
 
+class PhotoUploading extends ProfileState {}
+
+class PhotoUploadSuccess extends ProfileState {
+  final String photoUrl;
+
+  const PhotoUploadSuccess({required this.photoUrl});
+
+  @override
+  List<Object> get props => [photoUrl];
+}
+
 class ProfileLoaded extends ProfileState {
   final UserProfile userProfile;
   final List<Movie> favoriteMovies;
