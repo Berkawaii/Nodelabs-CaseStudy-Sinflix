@@ -85,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildProfileContent(BuildContext context, ProfileLoaded state, bool isDark) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return CustomScrollView(
       slivers: [
         // Custom App Bar

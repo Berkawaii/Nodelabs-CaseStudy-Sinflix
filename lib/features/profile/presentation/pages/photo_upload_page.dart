@@ -24,7 +24,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
 
   Future<void> _pickImage() async {
     final l10n = AppLocalizations.of(context)!;
-    
+
     try {
       final XFile? image = await _picker.pickImage(
         source: ImageSource.gallery,
@@ -45,7 +45,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
 
   Future<void> _uploadPhoto() async {
     final l10n = AppLocalizations.of(context)!;
-    
+
     if (_selectedImage == null) {
       _showErrorSnackBar(l10n.selectPhoto);
       return;
