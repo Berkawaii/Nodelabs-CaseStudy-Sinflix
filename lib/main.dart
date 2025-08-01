@@ -7,6 +7,7 @@ import 'core/logger/app_logger.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,10 @@ class SinflixApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => getIt<AuthBloc>())],
+      providers: [
+        BlocProvider(create: (context) => getIt<AuthBloc>()),
+        BlocProvider(create: (context) => getIt<ProfileBloc>()),
+      ],
       child: MaterialApp.router(
         title: 'Sinflix',
         debugShowCheckedModeBanner: false,

@@ -31,6 +31,9 @@ import '../../features/movie/domain/usecases/get_movies_usecase.dart' as _i536;
 import '../../features/movie/domain/usecases/toggle_favorite_usecase.dart'
     as _i211;
 import '../../features/movie/presentation/bloc/movie_bloc.dart' as _i48;
+import '../../features/profile/data/datasources/profile_api_service.dart'
+    as _i1041;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i469;
 import '../network/api_client.dart' as _i557;
 import '../storage/token_storage.dart' as _i973;
 import 'network_module.dart' as _i567;
@@ -71,6 +74,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i17.GetCurrentUserUseCase>(
       () => _i17.GetCurrentUserUseCase(gh<_i787.AuthRepository>()),
     );
+    gh.factory<_i1041.ProfileApiService>(
+      () => _i1041.ProfileApiService(gh<_i557.ApiClient>()),
+    );
     gh.factory<_i941.RegisterUseCase>(
       () => _i941.RegisterUseCase(gh<_i787.AuthRepository>()),
     );
@@ -87,6 +93,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i536.GetMoviesUseCase>(
       () => _i536.GetMoviesUseCase(gh<_i224.MovieRepository>()),
+    );
+    gh.factory<_i469.ProfileBloc>(
+      () => _i469.ProfileBloc(gh<_i1041.ProfileApiService>()),
     );
     gh.factory<_i48.MovieBloc>(
       () => _i48.MovieBloc(

@@ -129,4 +129,32 @@ class Movie extends Equatable {
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
+
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+      id: json['id'] ?? json['_id'] ?? '',
+      title: json['Title'] ?? '',
+      year: json['Year'] ?? '',
+      rated: json['Rated'] ?? '',
+      released: json['Released'] ?? '',
+      runtime: json['Runtime'] ?? '',
+      genre: json['Genre'] ?? '',
+      director: json['Director'] ?? '',
+      writer: json['Writer'] ?? '',
+      actors: json['Actors'] ?? '',
+      plot: json['Plot'] ?? '',
+      language: json['Language'] ?? '',
+      country: json['Country'] ?? '',
+      awards: json['Awards'] ?? '',
+      poster: json['Poster'] ?? '',
+      metascore: json['Metascore'] ?? '',
+      imdbRating: json['imdbRating'] ?? '',
+      imdbVotes: json['imdbVotes'] ?? '',
+      imdbID: json['imdbID'] ?? '',
+      type: json['Type'] ?? '',
+      images: List<String>.from(json['Images'] ?? []),
+      comingSoon: json['ComingSoon'] ?? false,
+      isFavorite: json['isFavorite'] ?? false,
+    );
+  }
 }

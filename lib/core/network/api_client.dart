@@ -32,7 +32,8 @@ class ApiClient {
         onRequest: (options, handler) async {
           final token = await _tokenStorage.getToken();
           if (token != null) {
-            options.headers['Authorization'] = 'Bearer $token';
+            // API requires token without Bearer prefix
+            options.headers['Authorization'] = token;
           }
           handler.next(options);
         },
