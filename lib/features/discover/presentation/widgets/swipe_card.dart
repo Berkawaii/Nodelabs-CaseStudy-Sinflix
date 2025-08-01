@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../movie/domain/entities/movie.dart';
+import '../../../movie/presentation/pages/movie_detail_page.dart';
 
 class SwipeCard extends StatefulWidget {
   final Movie movie;
@@ -168,6 +169,7 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
             child: Transform.scale(
               scale: scale,
               child: GestureDetector(
+                onTap: widget.isTop ? () => _onCardTap(context) : null,
                 onPanStart: widget.isTop ? _onPanStart : null,
                 onPanUpdate: widget.isTop ? _onPanUpdate : null,
                 onPanEnd: widget.isTop ? _onPanEnd : null,
@@ -332,6 +334,20 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
           ),
         );
       },
+    );
+  }
+
+  void _onCardTap(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.9,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        builder: (context, scrollController) => MovieDetailPage(movie: widget.movie),
+      ),
     );
   }
 }
