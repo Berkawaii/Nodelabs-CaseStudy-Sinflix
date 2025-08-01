@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sinflix/core/constants/app_assets.dart';
+import 'package:sinflix/core/theme/app_colors.dart';
 
 class LimitedOfferModal extends StatelessWidget {
   const LimitedOfferModal({super.key});
@@ -7,18 +8,17 @@ class LimitedOfferModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.8,
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFF8B2635), // Dark burgundy
-            Color(0xFF5D1A24), // Darker burgundy
-          ],
+        gradient: RadialGradient(
+          colors: [Color.fromARGB(255, 132, 1, 1), Color(0xff000000)],
+          stops: [0.1, 1],
+          center: Alignment.topCenter,
         ),
+
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+
       child: Column(
         children: [
           // Handle bar
@@ -146,26 +146,8 @@ class LimitedOfferModal extends StatelessWidget {
                     width: double.infinity,
                     height: 56,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xFFFF5722), Color(0xFFD32F2F), Color(0xFFB71C1C)],
-                      ),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(28),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFFFF5722).withOpacity(0.4),
-                          blurRadius: 15,
-                          spreadRadius: 1,
-                          offset: const Offset(0, 6),
-                        ),
-                        BoxShadow(
-                          color: const Color(0xFFFF5722).withOpacity(0.2),
-                          blurRadius: 25,
-                          spreadRadius: -5,
-                          offset: const Offset(0, -5),
-                        ),
-                      ],
                     ),
                     child: Material(
                       color: Colors.transparent,
@@ -214,12 +196,12 @@ class LimitedOfferModal extends StatelessWidget {
     return Container(
       height: 200,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [gradientColors[0], gradientColors[1], gradientColors[1].withOpacity(0.9)],
-          stops: const [0.0, 0.7, 1.0],
+        gradient: RadialGradient(
+          colors: [gradientColors[0], gradientColors[1]],
+          stops: [0.01, 1],
+          center: Alignment.topLeft,
         ),
+
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           // Main shadow

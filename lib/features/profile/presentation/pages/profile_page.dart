@@ -119,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin: const EdgeInsets.only(right: 16),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: AppColors.primary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -208,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -374,7 +374,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.black.withValues(alpha: 0.6),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.favorite, color: Colors.red, size: 16),
+                      child: Icon(Icons.favorite, color: AppColors.primary, size: 16),
                     ),
                   ),
                 ],
