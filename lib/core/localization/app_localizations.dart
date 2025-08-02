@@ -117,6 +117,8 @@ abstract class AppLocalizations {
   String get photoUploadedSuccessfully;
   String get photoUploadError;
   String get photoSelectError;
+  String get logout;
+  String get logoutConfirmation;
 
   // Limited Offer
   String get limitedOfferTitle;

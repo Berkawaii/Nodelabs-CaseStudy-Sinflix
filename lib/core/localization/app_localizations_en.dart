@@ -221,6 +221,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoSelectError => 'Error occurred while selecting photo';
 
   @override
+  String get logout => 'Logout';
+
+  @override
+  String get logoutConfirmation => 'Are you sure you want to logout?';
+
+  @override
   String get limitedOfferTitle => 'Limited Offer';
 
   @override

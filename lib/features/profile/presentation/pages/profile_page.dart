@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/localization/app_localizations.dart';
+import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/limited_offer_modal.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
+import '../../../auth/presentation/bloc/auth_event.dart';
+import '../../../auth/presentation/bloc/auth_state.dart';
 import '../../../movie/presentation/pages/movie_detail_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
@@ -52,6 +57,29 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  void _showLogoutConfirmation(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.logout),
+        content: Text(l10n.logoutConfirmation),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.read<AuthBloc>().add(const LogoutRequested());
+            },
+            style: TextButton.styleFrom(foregroundColor: AppColors.error),
+            child: Text(l10n.logout),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,35 +88,54 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
       body: SafeArea(
-        child: BlocBuilder<ProfileBloc, ProfileState>(
-          builder: (context, state) {
-            if (state is ProfileLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (state is ProfileError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Error: ${state.message}',
-                      style: AppTextStyles.bodyMedium.copyWith(color: Colors.red),
-                      textAlign: TextAlign.center,
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthUnauthenticated) {
+                  // Navigate to login page
+                  context.go(AppRouter.login);
+                } else if (state is AuthError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Logout failed: ${state.message}'),
+                      backgroundColor: AppColors.error,
                     ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(onPressed: _loadProfileData, child: const Text('Retry')),
-                  ],
-                ),
-              );
-            }
+                  );
+                }
+              },
+            ),
+          ],
+          child: BlocBuilder<ProfileBloc, ProfileState>(
+            builder: (context, state) {
+              if (state is ProfileLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            if (state is ProfileLoaded) {
-              return _buildProfileContent(context, state, isDark);
-            }
+              if (state is ProfileError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Error: ${state.message}',
+                        style: AppTextStyles.bodyMedium.copyWith(color: Colors.red),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(onPressed: _loadProfileData, child: const Text('Retry')),
+                    ],
+                  ),
+                );
+              }
 
-            return const Center(child: CircularProgressIndicator());
-          },
+              if (state is ProfileLoaded) {
+                return _buildProfileContent(context, state, isDark);
+              }
+
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
       ),
     );
@@ -113,6 +160,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           actions: [
+            // Logout Button
+            IconButton(
+              onPressed: () => _showLogoutConfirmation(context),
+              icon: Icon(Icons.logout, color: isDark ? AppColors.darkText : AppColors.lightText),
+              tooltip: l10n.logout,
+            ),
+            // Limited Offer Button
             GestureDetector(
               onTap: () => _showLimitedOfferModal(context),
               child: Container(

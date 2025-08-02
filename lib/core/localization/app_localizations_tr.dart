@@ -221,6 +221,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get photoSelectError => 'Fotoğraf seçilirken bir hata oluştu';
 
   @override
+  String get logout => 'Çıkış Yap';
+
+  @override
+  String get logoutConfirmation => 'Çıkış yapmak istediğinizden emin misiniz?';
+
+  @override
   String get limitedOfferTitle => 'Limited Offer';
 
   @override
