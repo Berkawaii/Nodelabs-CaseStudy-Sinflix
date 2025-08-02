@@ -42,7 +42,15 @@ class AnalyticsService {
   }
 
   Future<void> logCustomEvent({required String name, Map<String, Object>? parameters}) async {
-    await _analytics.logEvent(name: name, parameters: parameters);
+    // Convert boolean values to strings for Firebase Analytics compatibility
+    final convertedParameters = parameters?.map((key, value) {
+      if (value is bool) {
+        return MapEntry(key, value.toString());
+      }
+      return MapEntry(key, value);
+    });
+
+    await _analytics.logEvent(name: name, parameters: convertedParameters);
   }
 
   // User Properties

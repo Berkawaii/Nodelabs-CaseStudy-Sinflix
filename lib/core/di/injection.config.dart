@@ -114,6 +114,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i48.MovieBloc(
         gh<_i536.GetMoviesUseCase>(),
         gh<_i211.ToggleFavoriteUseCase>(),
+        gh<_i53.AnalyticsService>(),
+        gh<_i364.CrashlyticsService>(),
       ),
     );
     return this;

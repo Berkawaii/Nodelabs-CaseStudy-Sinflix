@@ -1,1 +1,37 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"sinflixberkay","appId":"1:394872047782:android:6d3cade0dd4244bc4e4c67","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"sinflixberkay","appId":"1:394872047782:ios:d3c898429dd02ca14e4c67","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"sinflixberkay","configurations":{"android":"1:394872047782:android:6d3cade0dd4244bc4e4c67","ios":"1:394872047782:ios:d3c898429dd02ca14e4c67","web":"1:394872047782:web:fcc2e05e3e18dcd44e4c67"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "sinflixberkay",
+          "appId": "1:394872047782:android:6d3cade0dd4244bc4e4c67",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "sinflixberkay",
+          "appId": "1:394872047782:ios:d3c898429dd02ca14e4c67",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "sinflixberkay",
+          "configurations": {
+            "android": "1:394872047782:android:6d3cade0dd4244bc4e4c67",
+            "ios": "1:394872047782:ios:d3c898429dd02ca14e4c67",
+            "web": "1:394872047782:web:fcc2e05e3e18dcd44e4c67"
+          }
+        }
+      }
+    }
+  },
+  "appDistribution": {
+    "serviceCredentialsFile": "firebase-service-account.json",
+    "app": "1:394872047782:android:6d3cade0dd4244bc4e4c67",
+    "groups": ["testers", "internal-team"],
+    "releaseNotesFile": "release-notes.txt"
+  }
+}
