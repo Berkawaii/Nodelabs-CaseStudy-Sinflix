@@ -292,7 +292,7 @@ The app tracks various user interactions:
 
 ### Color Palette
 
-- **Primary**: Modern blue accent
+- **Primary**: Modern red accent
 - **Background**: Adaptive light/dark backgrounds
 - **Cards**: Elevated surfaces with shadows
 - **Text**: High contrast, accessible typography
