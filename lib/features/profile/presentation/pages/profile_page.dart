@@ -190,14 +190,8 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               fontWeight: FontWeight.bold,
             ),
           ),
-          actions: [
-            // Refresh Button
-            IconButton(
-              onPressed: () => _loadProfileData(),
-              icon: Icon(Icons.refresh, color: isDark ? AppColors.darkText : AppColors.lightText),
-              tooltip: 'Refresh',
-            ),
 
+          actions: [
             // Limited Offer Button
             GestureDetector(
               onTap: () => _showLimitedOfferModal(context),
