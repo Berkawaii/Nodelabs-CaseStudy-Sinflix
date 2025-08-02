@@ -137,9 +137,9 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
 
   Color _getSwipeColor() {
     if (_dragOffset.dx > 50) {
-      return Colors.green.withOpacity(min(1.0, _dragOffset.dx / 200));
+      return Colors.green.withValues(alpha: min(1.0, _dragOffset.dx / 200));
     } else if (_dragOffset.dx < -50) {
-      return Colors.red.withOpacity(min(1.0, -_dragOffset.dx / 200));
+      return Colors.red.withValues(alpha: min(1.0, -_dragOffset.dx / 200));
     }
     return Colors.transparent;
   }
@@ -180,7 +180,7 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 10,
                         offset: const Offset(0, 5),
                       ),
@@ -213,7 +213,7 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                            colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
                             stops: const [0.4, 1.0],
                           ),
                         ),
@@ -244,7 +244,7 @@ class _SwipeCardState extends State<SwipeCard> with SingleTickerProviderStateMix
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black.withOpacity(0.9)],
+                              colors: [Colors.transparent, Colors.black.withValues(alpha: 0.9)],
                             ),
                           ),
                           child: Column(

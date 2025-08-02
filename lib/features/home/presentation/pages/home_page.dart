@@ -141,7 +141,7 @@ class _HomeViewState extends State<HomeView> {
           if (index >= movies.length) {
             // Loading more indicators
             return Card(
-              color: AppColors.grey.withOpacity(0.1),
+              color: AppColors.grey.withValues(alpha: .1),
               child: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
             );
           }

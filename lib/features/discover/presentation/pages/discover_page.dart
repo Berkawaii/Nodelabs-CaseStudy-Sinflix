@@ -98,7 +98,7 @@ class _DiscoverViewState extends State<DiscoverView> {
           color: isDark ? AppColors.darkBackground : AppColors.lightBackground,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: .1),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -113,7 +113,7 @@ class _DiscoverViewState extends State<DiscoverView> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
+                  color: Colors.red.withValues(alpha: .1),
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.red, width: 2),
                 ),
@@ -155,7 +155,7 @@ class _DiscoverViewState extends State<DiscoverView> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: .1),
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.green, width: 2),
                 ),

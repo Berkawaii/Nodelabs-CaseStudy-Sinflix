@@ -29,7 +29,7 @@ class MovieCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                  colors: [Colors.transparent, Colors.black.withValues(alpha: .7)],
                   stops: const [0.6, 1.0],
                 ),
               ),
@@ -63,7 +63,7 @@ class MovieCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withValues(alpha: .6),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -89,7 +89,7 @@ class MovieCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                    colors: [Colors.transparent, Colors.black.withValues(alpha: .8)],
                   ),
                 ),
                 child: Column(

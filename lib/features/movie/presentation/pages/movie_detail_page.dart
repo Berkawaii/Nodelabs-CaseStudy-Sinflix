@@ -49,7 +49,7 @@ class MovieDetailPage extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                        colors: [Colors.transparent, Colors.black.withValues(alpha: .7)],
                         stops: const [0.5, 1.0],
                       ),
                     ),
@@ -90,7 +90,7 @@ class MovieDetailPage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.7),
+                                color: Colors.black.withValues(alpha: .7),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Text(
@@ -243,7 +243,7 @@ class MovieDetailPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isDark ? AppColors.darkCard : AppColors.lightCard,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.grey.withOpacity(0.2)),
+                border: Border.all(color: AppColors.grey.withValues(alpha: .2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +330,7 @@ class MovieDetailPage extends StatelessWidget {
   void _showImageDialog(BuildContext context, List<String> images, int initialIndex) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.9),
+      barrierColor: Colors.black.withValues(alpha: .9),
       builder: (context) => ImageGalleryDialog(images: images, initialIndex: initialIndex),
     );
   }
@@ -404,7 +404,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: .6),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.close, color: Colors.white, size: 24),
@@ -419,7 +419,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: .6),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -451,7 +451,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: .6),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 24),
@@ -476,7 +476,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: .6),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 24),

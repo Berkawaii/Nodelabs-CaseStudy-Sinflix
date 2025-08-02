@@ -100,7 +100,7 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: AppColors.grey.withOpacity(0.2),
+                            color: AppColors.grey.withValues(alpha: .2),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -152,10 +152,10 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                           width: 200,
                           height: 200,
                           decoration: BoxDecoration(
-                            color: AppColors.grey.withOpacity(0.1),
+                            color: AppColors.grey.withValues(alpha: .1),
                             borderRadius: BorderRadius.circular(24),
                             border: Border.all(
-                              color: AppColors.grey.withOpacity(0.3),
+                              color: AppColors.grey.withValues(alpha: .3),
                               width: 2,
                               style: BorderStyle.solid,
                             ),
