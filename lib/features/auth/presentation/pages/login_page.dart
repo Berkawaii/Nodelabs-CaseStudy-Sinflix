@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_assets.dart';
+import '../../../../core/firebase/analytics_screen_mixin.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/logger/app_logger.dart';
 import '../../../../core/router/app_router.dart';
@@ -21,7 +22,13 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with AnalyticsScreenMixin {
+  @override
+  String get screenName => 'login_screen';
+
+  @override
+  String get screenClass => 'LoginPage';
+
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();

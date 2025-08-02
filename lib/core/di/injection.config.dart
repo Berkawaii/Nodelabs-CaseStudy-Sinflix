@@ -34,6 +34,9 @@ import '../../features/movie/presentation/bloc/movie_bloc.dart' as _i48;
 import '../../features/profile/data/datasources/profile_api_service.dart'
     as _i1041;
 import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i469;
+import '../firebase/analytics_service.dart' as _i53;
+import '../firebase/crashlytics_service.dart' as _i364;
+import '../firebase/firebase_example_service.dart' as _i965;
 import '../network/api_client.dart' as _i557;
 import '../storage/token_storage.dart' as _i973;
 import 'network_module.dart' as _i567;
@@ -47,6 +50,14 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
     gh.singleton<_i973.TokenStorage>(() => _i973.TokenStorage());
+    gh.singleton<_i53.AnalyticsService>(() => _i53.AnalyticsService());
+    gh.singleton<_i364.CrashlyticsService>(() => _i364.CrashlyticsService());
+    gh.factory<_i965.FirebaseExampleService>(
+      () => _i965.FirebaseExampleService(
+        gh<_i53.AnalyticsService>(),
+        gh<_i364.CrashlyticsService>(),
+      ),
+    );
     gh.singleton<_i557.ApiClient>(
       () => _i557.ApiClient(gh<_i973.TokenStorage>()),
     );
@@ -86,6 +97,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i941.RegisterUseCase>(),
         gh<_i48.LogoutUseCase>(),
         gh<_i17.GetCurrentUserUseCase>(),
+        gh<_i53.AnalyticsService>(),
+        gh<_i364.CrashlyticsService>(),
       ),
     );
     gh.factory<_i211.ToggleFavoriteUseCase>(

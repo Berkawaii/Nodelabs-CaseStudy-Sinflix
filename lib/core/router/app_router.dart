@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,6 +19,7 @@ class AppRouter {
   static final GoRouter _router = GoRouter(
     initialLocation: splash,
     debugLogDiagnostics: true,
+    observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
     routes: [
       // Splash Route
       GoRoute(path: splash, name: 'splash', builder: (context, state) => const SplashPage()),
