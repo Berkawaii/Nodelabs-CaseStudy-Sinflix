@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/entities/movie.dart';
-import '../bloc/movie_bloc.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final Movie movie;
@@ -101,26 +99,6 @@ class MovieDetailPage extends StatelessWidget {
                               ),
                             ),
                             const Spacer(),
-                            // Favorite Button
-                            GestureDetector(
-                              onTap: () {
-                                context.read<MovieBloc>().add(
-                                  MovieEvent.toggleFavorite(movieId: movie.id),
-                                );
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.7),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  movie.isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: movie.isFavorite ? Colors.red : Colors.white,
-                                  size: 28,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ],

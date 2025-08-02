@@ -73,7 +73,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
           // Full-screen GIF background
           Image.asset(
             'assets/images/sinflixsplash.gif',
-            fit: BoxFit.contain, // Adjusted to fit the screen properly
+            fit: BoxFit.cover, // Adjusted to fit the screen properly
             width: double.infinity,
             height: double.infinity,
           ),
