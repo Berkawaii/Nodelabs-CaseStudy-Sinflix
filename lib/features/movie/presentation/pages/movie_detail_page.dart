@@ -225,7 +225,7 @@ class MovieDetailPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-      //  const SizedBox(height: 16),
+        //  const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -238,12 +238,12 @@ class MovieDetailPage extends StatelessWidget {
           itemCount: infoItems.length,
           itemBuilder: (context, index) {
             final item = infoItems[index];
-            final hasLongContent = item['value']!.length > 50;
-            
+            final hasLongContent = item['value']!.length > 20;
+
             return GestureDetector(
-              onTap: hasLongContent 
-                ? () => _showInfoDialog(context, item['label']!, item['value']!, isDark)
-                : null,
+              onTap: hasLongContent
+                  ? () => _showInfoDialog(context, item['label']!, item['value']!, isDark)
+                  : null,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.all(12),
@@ -251,17 +251,19 @@ class MovieDetailPage extends StatelessWidget {
                   color: isDark ? AppColors.darkCard : AppColors.lightCard,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: hasLongContent 
-                      ? AppColors.primary.withValues(alpha: .3)
-                      : AppColors.grey.withValues(alpha: .2),
+                    color: hasLongContent
+                        ? AppColors.primary.withValues(alpha: .3)
+                        : AppColors.grey.withValues(alpha: .2),
                   ),
-                  boxShadow: hasLongContent ? [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: .1),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ] : null,
+                  boxShadow: hasLongContent
+                      ? [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: .1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
+                      : null,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,11 +283,7 @@ class MovieDetailPage extends StatelessWidget {
                           ),
                         ),
                         if (hasLongContent)
-                          Icon(
-                            Icons.info_outline,
-                            size: 16,
-                            color: AppColors.grey,
-                          ),
+                          Icon(Icons.info_outline, size: 16, color: AppColors.grey),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -418,9 +416,7 @@ class MovieDetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Container(
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.6,
-                ),
+                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.6),
                 child: SingleChildScrollView(
                   child: Text(
                     content,

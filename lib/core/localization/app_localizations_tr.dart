@@ -172,7 +172,7 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get pleaseTryAgain => 'Lütfen daha sonra tekrar deneyin';
 
-    @override
+  @override
   String get addedToFavorites => 'favorilere eklendi';
 
   // Navigation

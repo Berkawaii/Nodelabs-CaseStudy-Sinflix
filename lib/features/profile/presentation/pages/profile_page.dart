@@ -179,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
       slivers: [
         // Custom App Bar
         SliverAppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
           elevation: 0,
           pinned: true,
           automaticallyImplyLeading: false,
