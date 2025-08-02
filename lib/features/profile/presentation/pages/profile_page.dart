@@ -11,6 +11,7 @@ import '../../../../shared/widgets/limited_offer_modal.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth_event.dart';
 import '../../../auth/presentation/bloc/auth_state.dart';
+import '../../../movie/presentation/bloc/movie_bloc.dart';
 import '../../../movie/presentation/pages/movie_detail_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
@@ -24,11 +25,26 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _loadProfileData();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // App resumed, reload profile data
+      _loadProfileData();
+    }
   }
 
   void _loadProfileData() {
@@ -105,6 +121,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               },
             ),
+            // Listen to MovieBloc for favorite changes
+            BlocListener<MovieBloc, MovieState>(
+              listener: (context, state) {
+                // When a movie toggle favorite action completes, reload favorites
+                // This will be triggered after any toggle favorite operation
+                if (mounted) {
+                  // Small delay to ensure the API call is completed
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    if (mounted) {
+                      context.read<ProfileBloc>().add(const LoadFavoriteMovies());
+                    }
+                  });
+                }
+              },
+            ),
           ],
           child: BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, state) {
@@ -160,6 +191,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           actions: [
+            // Refresh Button
+            IconButton(
+              onPressed: () => _loadProfileData(),
+              icon: Icon(Icons.refresh, color: isDark ? AppColors.darkText : AppColors.lightText),
+              tooltip: 'Refresh',
+            ),
             // Logout Button
             IconButton(
               onPressed: () => _showLogoutConfirmation(context),
