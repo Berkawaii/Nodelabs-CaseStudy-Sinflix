@@ -225,53 +225,102 @@ class MovieDetailPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 16),
+      //  const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 2.5, // UI overflow sorununu çözmek için artırdık
+            childAspectRatio: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
           ),
           itemCount: infoItems.length,
           itemBuilder: (context, index) {
             final item = infoItems[index];
-            return Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : AppColors.lightCard,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.grey.withValues(alpha: .2)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    item['label']!,
-                    style: AppTextStyles.bodySmall.copyWith(
-                      color: AppColors.grey,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+            final hasLongContent = item['value']!.length > 50;
+            
+            return GestureDetector(
+              onTap: hasLongContent 
+                ? () => _showInfoDialog(context, item['label']!, item['value']!, isDark)
+                : null,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkCard : AppColors.lightCard,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: hasLongContent 
+                      ? AppColors.primary.withValues(alpha: .3)
+                      : AppColors.grey.withValues(alpha: .2),
                   ),
-                  const SizedBox(height: 4),
-                  Expanded(
-                    // UI overflow sorununu çözmek için Expanded ekledik
-                    child: Text(
-                      item['value']!,
-                      style: AppTextStyles.bodyMedium.copyWith(
-                        color: isDark ? AppColors.darkText : AppColors.lightText,
-                        fontWeight: FontWeight.w600,
+                  boxShadow: hasLongContent ? [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: .1),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ] : null,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            item['label']!,
+                            style: AppTextStyles.bodySmall.copyWith(
+                              color: AppColors.grey,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (hasLongContent)
+                          Icon(
+                            Icons.info_outline,
+                            size: 16,
+                            color: AppColors.grey,
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              item['value']!,
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              maxLines: hasLongContent ? 2 : 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (hasLongContent && item['value']!.length > 60)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                l10n.tapToSeeMore,
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                      maxLines: 3, // Daha fazla satır için artırdık
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
@@ -332,6 +381,60 @@ class MovieDetailPage extends StatelessWidget {
       context: context,
       barrierColor: Colors.black.withValues(alpha: .9),
       builder: (context) => ImageGalleryDialog(images: images, initialIndex: initialIndex),
+    );
+  }
+
+  void _showInfoDialog(BuildContext context, String title, String content, bool isDark) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: AppTextStyles.h3.copyWith(
+                        color: isDark ? AppColors.darkText : AppColors.lightText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: Icon(
+                      Icons.close,
+                      color: isDark ? AppColors.darkText : AppColors.lightText,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Container(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.6,
+                ),
+                child: SingleChildScrollView(
+                  child: Text(
+                    content,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: isDark ? AppColors.darkText : AppColors.lightText,
+                      height: 1.6,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

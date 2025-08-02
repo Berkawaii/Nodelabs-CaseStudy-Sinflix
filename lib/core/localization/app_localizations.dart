@@ -86,6 +86,7 @@ abstract class AppLocalizations {
   String get awards;
   String get metascore;
   String get votes;
+  String get tapToSeeMore;
 
   // Discover Screen
   String get discover;

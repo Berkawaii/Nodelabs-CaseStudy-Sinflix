@@ -141,6 +141,9 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get votes => 'oy';
 
+  @override
+  String get tapToSeeMore => 'Daha fazla görmek için dokun';
+
   // Discover Screen
   @override
   String get discover => 'Keşfet';

@@ -141,6 +141,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get votes => 'votes';
 
+  @override
+  String get tapToSeeMore => 'Tap to see more';
+
   // Discover Screen
   @override
   String get discover => 'Discover';
