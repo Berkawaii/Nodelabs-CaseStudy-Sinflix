@@ -19,6 +19,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+  // ignore: unused_field
   late Animation<double> _scaleAnimation;
 
   @override
@@ -65,122 +66,86 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthAuthenticated) {
-            // Kullanıcı giriş yapmış, ana sayfaya yönlendir
-            Future.delayed(const Duration(milliseconds: 1500), () {
-              if (mounted) {
-                context.go(AppRouter.home);
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Full-screen GIF background
+          Image.asset(
+            'assets/images/sinflixsplash.gif',
+            fit: BoxFit.contain, // Adjusted to fit the screen properly
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          // Content
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthAuthenticated) {
+                // Kullanıcı giriş yapmış, ana sayfaya yönlendir
+                Future.delayed(const Duration(milliseconds: 1500), () {
+                  if (mounted) {
+                    context.go(AppRouter.home);
+                  }
+                });
+              } else if (state is AuthUnauthenticated) {
+                // Kullanıcı giriş yapmamış, login sayfasına yönlendir
+                Future.delayed(const Duration(milliseconds: 1500), () {
+                  if (mounted) {
+                    context.go(AppRouter.login);
+                  }
+                });
               }
-            });
-          } else if (state is AuthUnauthenticated) {
-            // Kullanıcı giriş yapmamış, login sayfasına yönlendir
-            Future.delayed(const Duration(milliseconds: 1500), () {
-              if (mounted) {
-                context.go(AppRouter.login);
-              }
-            });
-          }
-        },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo ve uygulama adı
-              AnimatedBuilder(
-                animation: _animationController,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _scaleAnimation.value,
-                    child: Opacity(
-                      opacity: _fadeAnimation.value,
-                      child: Column(
-                        children: [
-                          // Logo
-                          Container(
-                            width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.primary.withOpacity(0.3),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 10),
+            },
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 400),
+                  // Loading indicator
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return AnimatedBuilder(
+                        animation: _fadeAnimation,
+                        builder: (context, child) {
+                          return Opacity(
+                            opacity: _fadeAnimation.value,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 16),
+
+                                Text(
+                                  _getLoadingText(state),
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    color: Colors.white.withValues(alpha: .8),
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black.withValues(alpha: .7),
+                                        offset: const Offset(1, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.movie, size: 60, color: Colors.white),
-                          ),
-
-                          const SizedBox(height: 24),
-
-                          // Uygulama adı
-                          Text(
-                            'Sinflix',
-                            style: AppTextStyles.h1.copyWith(
-                              color: isDark ? AppColors.darkText : AppColors.lightText,
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          // Slogan
-                          Text(
-                            'Your Movie Experience',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.grey,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-
-              const SizedBox(height: 80),
-
-              // Loading indicator
-              BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  return AnimatedBuilder(
-                    animation: _fadeAnimation,
-                    builder: (context, child) {
-                      return Opacity(
-                        opacity: _fadeAnimation.value,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                              ),
-                            ),
-
-                            const SizedBox(height: 16),
-
-                            Text(
-                              _getLoadingText(state),
-                              style: AppTextStyles.bodySmall.copyWith(color: AppColors.grey),
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
