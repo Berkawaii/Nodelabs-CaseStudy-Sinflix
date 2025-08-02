@@ -169,8 +169,17 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get pleaseTryAgain => 'Lütfen daha sonra tekrar deneyin';
 
+    @override
+  String get addedToFavorites => 'favorilere eklendi';
+
+  // Navigation
   @override
-  String get addedToFavorites => 'Favorilere eklendi!';
+  String get home => 'Ana Sayfa';
+
+  @override
+  String get profile => 'Profil';
+
+  // Discover Screen
 
   // Splash Screen
   @override

@@ -99,6 +99,10 @@ abstract class AppLocalizations {
   String get pleaseTryAgain;
   String get addedToFavorites;
 
+  // Navigation
+  String get home;
+  String get profile;
+
   // Splash Screen
   String get yourMovieExperience;
   String get checkingAuthentication;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injection.dart';
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../discover/presentation/pages/discover_page.dart';
 import '../../../home/presentation/pages/home_page.dart';
@@ -26,6 +27,7 @@ class _MainLayoutPageState extends State<MainLayoutPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return MultiBlocProvider(
       providers: [
@@ -71,21 +73,21 @@ class _MainLayoutPageState extends State<MainLayoutPage> {
             elevation: 0,
             selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: 'Home',
+                icon: const Icon(Icons.home_outlined),
+                activeIcon: const Icon(Icons.home),
+                label: l10n.home,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.explore_outlined),
-                activeIcon: Icon(Icons.explore),
-                label: 'Discover',
+                icon: const Icon(Icons.explore_outlined),
+                activeIcon: const Icon(Icons.explore),
+                label: l10n.discover,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
-                activeIcon: Icon(Icons.person),
-                label: 'Profile',
+                icon: const Icon(Icons.person_outline),
+                activeIcon: const Icon(Icons.person),
+                label: l10n.profile,
               ),
             ],
           ),

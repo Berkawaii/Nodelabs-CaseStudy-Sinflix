@@ -169,8 +169,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pleaseTryAgain => 'Please try again later';
 
+    @override
+  String get addedToFavorites => 'added to favorites';
+
+  // Navigation
   @override
-  String get addedToFavorites => 'Added to favorites!';
+  String get home => 'Home';
+
+  @override
+  String get profile => 'Profile';
+
+  // Discover Screen
 
   // Splash Screen
   @override

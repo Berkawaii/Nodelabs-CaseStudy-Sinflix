@@ -197,12 +197,7 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               icon: Icon(Icons.refresh, color: isDark ? AppColors.darkText : AppColors.lightText),
               tooltip: 'Refresh',
             ),
-            // Logout Button
-            IconButton(
-              onPressed: () => _showLogoutConfirmation(context),
-              icon: Icon(Icons.logout, color: isDark ? AppColors.darkText : AppColors.lightText),
-              tooltip: l10n.logout,
-            ),
+
             // Limited Offer Button
             GestureDetector(
               onTap: () => _showLimitedOfferModal(context),
@@ -310,6 +305,16 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(width: 4),
+                    // Logout Button
+                    IconButton(
+                      onPressed: () => _showLogoutConfirmation(context),
+                      icon: Icon(
+                        Icons.logout,
+                        color: isDark ? AppColors.darkText : AppColors.lightText,
+                      ),
+                      tooltip: l10n.logout,
                     ),
                   ],
                 ),
