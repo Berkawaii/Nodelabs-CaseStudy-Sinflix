@@ -170,7 +170,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseTryAgain => 'Please try again later';
 
   @override
-  String get addedToFavorites => 'added to favorites!';
+  String get addedToFavorites => 'Added to favorites!';
+
+  // Splash Screen
+  @override
+  String get yourMovieExperience => 'Your Movie Experience';
+
+  @override
+  String get checkingAuthentication => 'Checking authentication...';
+
+  @override
+  String get welcomeBack => 'Welcome back!';
+
+  @override
+  String get initializing => 'Initializing...';
+
+  // Profile Screen
 
   @override
   String get profileDetail => 'Profile Detail';

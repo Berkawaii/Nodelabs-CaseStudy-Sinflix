@@ -170,7 +170,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pleaseTryAgain => 'Lütfen daha sonra tekrar deneyin';
 
   @override
-  String get addedToFavorites => 'favorilere eklendi!';
+  String get addedToFavorites => 'Favorilere eklendi!';
+
+  // Splash Screen
+  @override
+  String get yourMovieExperience => 'Film Deneyiminiz';
+
+  @override
+  String get checkingAuthentication => 'Kimlik doğrulanıyor...';
+
+  @override
+  String get welcomeBack => 'Tekrar hoşgeldiniz!';
+
+  @override
+  String get initializing => 'Başlatılıyor...';
+
+  // Profile Screen
 
   @override
   String get profileDetail => 'Profil Detayı';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -151,13 +152,15 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   }
 
   String _getLoadingText(AuthState state) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (state is AuthLoading) {
-      return 'Checking authentication...';
+      return l10n.checkingAuthentication;
     } else if (state is AuthAuthenticated) {
-      return 'Welcome back!';
+      return l10n.welcomeBack;
     } else if (state is AuthUnauthenticated) {
-      return 'Loading...';
+      return l10n.loading;
     }
-    return 'Initializing...';
+    return l10n.initializing;
   }
 }
